@@ -18,7 +18,7 @@ class CreateImage extends Migration
             $table->string('url');
             $table->morphs('imageable');
             $table->softDeletes();
-            $table->timestamp('created_at');
+            $table->timestamp('created_at')->nullable();
         });
     }
 

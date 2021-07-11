@@ -25,6 +25,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        \Illuminate\Support\Facades\Schema::defaultStringLength(191);
         Relation::morphMap([
             'product' => 'App\Models\Product',
             'inventory' => 'App\Models\Inventory',
