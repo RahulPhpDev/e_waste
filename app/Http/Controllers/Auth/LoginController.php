@@ -22,13 +22,12 @@ class LoginController extends Controller
     use AuthenticatesUsers;
 
     
-   public const HOME = '/admin/user';
     /**
      * Where to redirect users after login.
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = '/admin/user';
 
     /**
      * Create a new controller instance.
