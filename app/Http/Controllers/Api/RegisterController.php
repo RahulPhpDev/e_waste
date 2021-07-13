@@ -45,13 +45,17 @@ class RegisterController extends Controller
     {
 
     $validator = Validator::make($request->all(), [
-             'phone_number' => ['required',  'regex:/[0-9]{10}/', 'digits:10', 'unique:users,phone'],
+             // 'phone_number' => ['required',  'regex:/[0-9]{10}/', 'digits:10', 'unique:users,phone'],
+             'phone_number' => ['required',  'regex:/[0-9]{10}/', 'digits:10'],
         ]);
        if ( $validator->fails() )
        {
         return $validator->validate();
        }
 
+      if ( $res  = $this->checkLogin($request) ) {
+        return $res;
+      }
         $randomNumber = random_int(1000, 9999);
 
         $user =  User::create([
@@ -68,5 +72,19 @@ class RegisterController extends Controller
 
         return new RegisterResource($user);
 
+    }
+
+    private function checkLogin($request)
+    {
+        // dd($request);
+        if ($user = User::where('phone', $request->phone_number)->first()) {
+            $token = $user->createToken($user->id)->plainTextToken;
+
+            $user->passowrd = Hash::make(random_int(1000, 9999));
+
+            $user->token = $token;
+         return new RegisterResource($user);
+    }
+        return false;
     }
 }
