@@ -79,9 +79,10 @@ class RegisterController extends Controller
         // dd($request);
         if ($user = User::where('phone', $request->phone_number)->first()) {
             $token = $user->createToken($user->id)->plainTextToken;
-
-            $user->passowrd = Hash::make(random_int(1000, 9999));
-
+            $otp  = random_int(1000, 9999);
+            $user->password = Hash::make($otp);
+            $user->save();
+            $user->otp = $otp;
             $user->token = $token;
          return new RegisterResource($user);
     }
