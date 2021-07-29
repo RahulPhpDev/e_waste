@@ -18,6 +18,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::group([
+// 'middleware' => 'auth:api',
+'namespace' => 'Guest'
+], function () {
+       Route::get('why-we','HomePageController@whyWe' );
+});
 
 Route::group([
     'namespace' => 'Api',
@@ -34,5 +40,8 @@ Route::group([
     Route::get('zone','ApiZoneController@index' );
     Route::get('inventory','ApiInventoryController@index' );
     Route::get('type','ApiProductTypeController@index' );
-
+    Route::post('sell-scrap', 'SellController@store');
+    Route::apiResource('user-address', 'ApiUserAddressController');
+    Route::apiResource('scrap-order', 'ScrapSellingOrderController');
+    Route::apiResource('profile', 'ApiUserProfileController');
     });

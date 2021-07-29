@@ -17,7 +17,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-         $records = Category::paginate( PaginationEnum::Show10Records );
+         $records = Category::with('image')->paginate( PaginationEnum::Show10Records );
          return view('admin/category/index' , compact('records'));
     }
 
@@ -44,7 +44,25 @@ class CategoryController extends Controller
             'description' => 'required|max:200',
         ]);
 
-     Category::create( $valid );
+    $category =  Category::create( $valid );
+       if ( $request->hasFile('category_image') &&
+            $request->file('category_image')->isValid()
+        )
+        {
+             $validated = $request->validate([
+                    'category_image' => 'mimes:jpeg,png|max:1014',
+                ]);
+
+            $path =  $request->file('category_image')
+                                ->storeAs('public/category',
+                                    $category->id.'.'.$request->category_image->extension()
+                                );
+
+                $category->image()->create([
+                    'url' => $path,
+                ]);
+
+        }
     return redirect()->route('admin.category.index');
     }
 

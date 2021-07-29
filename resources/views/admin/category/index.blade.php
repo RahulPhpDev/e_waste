@@ -13,14 +13,14 @@
                            href="{{route('admin.category.create')}}"
                            >
 
-                           Add Type
+                           Add Category
                        </a>
                         <table class="responsive-table bordered striped Highlight">
                             <thead class="text-warning">
                             @component('partials.th',
                                         [
                                             'tableHeads' =>
-                                                ['ID', 'Name','Description', 'Action']
+                                                ['ID', 'Name','Description','Image', 'Action']
                                         ])
                             @endcomponent
 
@@ -29,6 +29,8 @@
                                   @each('admin.category.td-records', $records, 'record', 'partials.table.empty')
                             </tbody>
                         </table>
+
+                         {{ $records->links() }}
 
                     </div>
                 </div>

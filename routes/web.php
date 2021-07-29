@@ -50,6 +50,21 @@ Route::group([
 //shallow nesting routing
 
    Route::resource('product.inventories', 'InventoryController')->shallow();
+   Route::resource('why-we', 'WhyWeController');
+   Route::resource('article', 'ArticleController');
+   Route::delete('article/video/{id}/destroy', 'ArticleController@videoDelete')->name('article.destroy.video');
+   Route::delete('article/image/{id}/destroy', 'ArticleController@imageDelete')->name('article.destroy.image');
+
+   Route::any('article/image/{id}/store', 'ArticleController@imageUpdate')->name('article.image.store');
+   Route::any('article/video/{id}/store', 'ArticleController@videoUpdate')->name('article.video.store');
+
+
+   Route::resource('event', 'EventController');
+   Route::delete('event/video/{id}/destroy', 'EventController@videoDelete')->name('event.destroy.video');
+   Route::delete('event/image/{id}/destroy', 'EventController@imageDelete')->name('event.destroy.image');
+
+   Route::any('event/image/{id}/store', 'EventController@imageUpdate')->name('event.image.store');
+   Route::any('event/video/{id}/store', 'EventController@videoUpdate')->name('event.video.store');
 
 });
 

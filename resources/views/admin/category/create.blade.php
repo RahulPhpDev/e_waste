@@ -25,17 +25,35 @@
                             @enderror
                         </div>
 
+                    </div>
 
-                        <div class="input-field col m6 s6">
+                    <div class = "row">
+
+                        <div class="input-field col m12 s12">
 
 
-                               <label for="description" class="active"> Description</label>
                               <textarea id = "description" name = "description" id="message5" class="materialize-textarea"></textarea>
 
                             @error('description')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
+
+
+
+                    </div>
+
+                    <div class = "row">
+
+                    <div class="col m6 s12 file-field input-field">
+                        <div class="btn float-right">
+                            <span>File</span>
+                            <input type="file" name="category_image">
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text">
+                        </div>
+                    </div>
 
                         <div class="input-field col m4 s12">
                             <div class="input-field col s12">

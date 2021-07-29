@@ -6,10 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use App\Models\{
-    Role,
-    Zone
-};
+use App\Models\{Role, Scrap, Zone, UserAddress,Image};
 
 class User extends Authenticatable
 {
@@ -59,5 +56,21 @@ class User extends Authenticatable
      public function firstZone()
     {
         return $this->zone()->first();
+    }
+
+    public function address()
+    {
+        return $this->hasOne(UserAddress::class);
+    }
+
+    public function scrapOrder()
+    {
+        return $this->hasMany(Scrap::class);
+    }
+
+
+    public function image()
+    {
+        return $this->morphOne(Image::class, 'imageable');
     }
 }

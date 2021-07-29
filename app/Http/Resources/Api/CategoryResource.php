@@ -18,6 +18,8 @@ class CategoryResource extends JsonResource
             "id" =>  $this->id,
             "name" =>   $this->name,
             "description" =>  $this->description,
+            'image' => $this->when($this->image, $this->image['url']),
+
         ];
     }
 

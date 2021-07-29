@@ -12,4 +12,5 @@ use BenSampo\Enum\Enum;
 final class PaginationEnum extends Enum
 {
     const Show10Records =   10;
+    const Show20Records =   20;
 }

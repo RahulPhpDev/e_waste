@@ -41,6 +41,17 @@
                     link='admin.product.index'
                     icon="add_shopping_cart"
                 />
+                 <x-admin.navigation
+                    names='WhyWe'
+                    link='admin.why-we.index'
+                    icon="add_shopping_cart"
+                />
+
+                 <x-admin.navigation
+                    names='Article'
+                    link='admin.article.index'
+                    icon="add_shopping_cart"
+                />
 
     </ul>
 </aside>

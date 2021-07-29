@@ -241,6 +241,13 @@
 <script src="{{ URL::asset('admin-assets/js/select2.full.min.js') }}"></script>
 
 <script src ="{{ URL::asset('admin-assets/js/form-select2.min.js') }}"/></script>
+<!-- <script src ="{{ URL::asset('admin-assets/js/ckeditor.js') }}"/></script> -->
+ <script src="https://cdn.ckeditor.com/4.16.1/standard/ckeditor.js"></script>
+
+
+<script>
+    CKEDITOR.replace('description' );
+</script>
 
 
 

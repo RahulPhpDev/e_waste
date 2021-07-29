@@ -12,5 +12,12 @@ class UserAddress extends Model
 	 protected $guarded = [];
 
 
+
+	 public function district()
+	 {
+	 	return $this->belongsTo(District::class);
+	 }
+
+
     //
 }

@@ -17,7 +17,7 @@ class ApiCategoryController extends Controller
      */
     public function index()
     {
-        return CategoryResource::collection(Category::all())
+        return CategoryResource::collection(Category::with('image')->get())
          ->additional([
                     'sucess' => true
                 ]);

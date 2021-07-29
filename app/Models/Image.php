@@ -19,9 +19,14 @@ class Image extends Model
 
 	// public $timestamps = false;
 
-	public function setUrlAttribute($value)
+	// public function setUrlAttribute($value)
+	// {
+	// 	 $this->attributes['url'] =  Str::replaceFirst('public/', '', $value);
+	// }
+
+	public function getUrlAttribute($value)
 	{
-		 $this->attributes['url'] =  Str::replaceFirst('public/', '', $value);
+		return  Str::replaceFirst('public/', '', $value);
 	}
 
 	public function imageable()
