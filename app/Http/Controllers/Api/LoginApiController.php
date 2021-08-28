@@ -43,9 +43,11 @@ class LoginApiController extends Controller
         if ($user) {
 
             if (Hash::check($matchForPassword, $user->password)) {
-                $token = $user->createToken('authToken')->accessToken;
+                // $token = $user->createToken('authToken')->accessToken;
+              $token = $user->createToken($user->id)->plainTextToken;
                 // dd($token->token);
-                $user->token = $token->token;
+                // $user->token = $token->token;
+                $user->token = $token;
                 $response = [
                                'success' => true,
                               'msg' => 'Otp Verified',
