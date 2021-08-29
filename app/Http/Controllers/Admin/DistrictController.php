@@ -8,7 +8,7 @@ use App\Enums\PaginationEnum;
 use App\Models\District;
 use App\Enums\FlashMessagesEnum;
 
-
+use Illuminate\Support\Arr;
 
 class DistrictController extends Controller
 {
@@ -46,7 +46,7 @@ class DistrictController extends Controller
         'code' => 'required|unique:districts|max:10',
         ]);
 
-     District::create( $valid );
+     District::create( $valid )->translate();
     return redirect()->route('admin.district.index')->with('success',FlashMessagesEnum::CreatedMsg);
     }
 
@@ -90,7 +90,7 @@ class DistrictController extends Controller
             'code' => [ 'required', 'max:10'    ]
         ]);
 
-     $district->update( $valid );
+     $district->update( $valid )->translate();
     return redirect()->route('admin.district.index')->with('success',FlashMessagesEnum::UpdateMsg);;
     }
 
@@ -106,5 +106,27 @@ class DistrictController extends Controller
         return redirect()->route('admin.district.index')->with('success',FlashMessagesEnum::DeletedMsg);;
 
 
+    }
+
+
+    public function bilingual(District $district, string $field)
+    {
+        return view('admin.district.bilingual',[
+            'record' => $district,
+             'field' => 'hi_'.$field,
+             'field_value'  =>  $district->{'hi_'.$field}
+        ]);
+    }
+
+
+    public function storeBilingual(Request $request, District $district)
+    {
+        $final= collect($district->translatable)->filter( function($value) use ( $request) {
+            return Arr::exists($request->all()  ,  'hi_'.$value );
+        })->map( function ($rec)  {
+            return 'hi_'.$rec;
+        })->all();
+        $district->update($request->only($final));
+        return redirect()->route('admin.district.index')->with('success',FlashMessagesEnum::UpdateMsg);;
     }
 }

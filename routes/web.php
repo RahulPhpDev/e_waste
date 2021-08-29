@@ -42,8 +42,17 @@ Route::group([
    	return view('admin/dashboard');
    });
    Route::resource('district', 'DistrictController');
+   Route::get('district/bilingual/{district?}/{field?}', 'DistrictController@bilingual')->name('district.bilingual');
+   Route::put('district/bilingual/{district?}', 'DistrictController@storeBilingual')
+            ->name('district.bilingual');
+
+//
    Route::resource('type', 'ProductTypeController');
    Route::resource('category', 'CategoryController');
+      Route::get('category/bilingual/{category?}/{field?}', 'CategoryController@bilingual')->name('category.bilingual');
+   Route::put('category/bilingual/{category?}', 'CategoryController@storeBilingual')
+            ->name('category.bilingual');
+
    Route::resource('zone', 'ZoneController');
    Route::resource('product', 'ProductController');
 

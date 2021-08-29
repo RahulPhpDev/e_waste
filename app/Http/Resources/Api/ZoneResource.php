@@ -21,6 +21,7 @@ class ZoneResource extends JsonResource
             "zip_code" => $this->zip_code,
             "lattitude" => $this->lattitude,
             "longitute" => $this->longitute,
+            "image" => '',
             "landmark" => $this->landmark,
             "district" => [
                "id" => $this->district->id,

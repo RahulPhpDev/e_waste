@@ -24,7 +24,13 @@
 </div>
 
 
+    @stack('scripts')
 </body>
+
+
+
+
+
 
 {{--@section('footer')--}}
 @include('layouts/admin/footer')

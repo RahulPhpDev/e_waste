@@ -39,4 +39,19 @@
         </div>
     </div>
 
+    @push('scripts')
+        <script>
+            async function fetchHindiRecord(id, name)
+            {
+                let response = await fetch(
+                    "{{ route('admin.category.bilingual') }}" + '/' + id+'/'+name,
+                    )
+                .then( response =>  response.text())
+                .then((html) => {
+                    $("#modal-content").html(html);
+                })
+            }
+        </script>
+    @endpush
+
 </x-admin.layout>

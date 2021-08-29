@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Enums\PaginationEnum;
 use App\Enums\FlashMessagesEnum;
 use App\Models\Category;
+use Illuminate\Support\Arr;
 
 class CategoryController extends Controller
 {
@@ -44,7 +45,7 @@ class CategoryController extends Controller
             'description' => 'required|max:200',
         ]);
 
-    $category =  Category::create( $valid );
+    $category =  Category::create( $valid )->translate();
        if ( $request->hasFile('category_image') &&
             $request->file('category_image')->isValid()
         )
@@ -104,7 +105,7 @@ class CategoryController extends Controller
              'description' => 'required|max:200',
         ]);
 
-     $category->update( $valid );
+     $category->update( $valid )->translate();
     return redirect()->route('admin.category.index')->with('success',FlashMessagesEnum::CreatedMsg);;
     }
 
@@ -118,5 +119,27 @@ class CategoryController extends Controller
     {
        $category->delete();
        return redirect()->route('admin.category.index')->with('success',FlashMessagesEnum::DeletedMsg);;
+    }
+
+
+    public function bilingual(Category $category, string $field)
+    {
+        return view('admin.category.bilingual',[
+            'record' => $category,
+             'field' => 'hi_'.$field,
+             'field_value'  =>  $category->{'hi_'.$field}
+        ]);
+    }
+
+
+    public function storeBilingual(Request $request, Category $category)
+    {
+        $final= collect($category->translatable)->filter( function($value) use ( $request) {
+            return Arr::exists($request->all()  ,  'hi_'.$value );
+        })->map( function ($rec)  {
+            return 'hi_'.$rec;
+        })->all();
+        $category->update($request->only($final));
+        return redirect()->route('admin.category.index')->with('success',FlashMessagesEnum::UpdateMsg);
     }
 }

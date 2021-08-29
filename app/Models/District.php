@@ -2,11 +2,19 @@
 
 namespace App\Models;
 
+
 use Illuminate\Database\Eloquent\Model;
+
+use App\Traits\TranslatorTrait;
+
 class District extends Model
 {
-	 protected $guarded = [];
+	use TranslatorTrait;
 
 
+    protected $guarded = [];
+
+
+    public $translatable = ['name'];
     //
 }

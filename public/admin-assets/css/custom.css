@@ -14,3 +14,11 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
 .camel-case {
     text-transform: capitalize;
 }
+
+.hindi_btn {
+    display: none;
+}
+
+.responsive-table:hover .hindi_btn{
+    display: inline-block;
+}

@@ -23,7 +23,8 @@ class UserProfileResource extends JsonResource
             "phone" => $this->phone,
             "active" => $this->active,
             "address" =>  $this->when( $this->address , new UserAddressResource( $this->address ) ),
-            'image' =>  $this->when($imageUrl, 'storage/'.$imageUrl),
+            'image' => $imageUrl ? 'storage/'.$imageUrl :'',
+            //$this->when($imageUrl, 'storage/'.$imageUrl),
         ];
     }
 

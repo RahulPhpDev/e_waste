@@ -1,6 +1,23 @@
 <tr>
-    <td> {{$record->id}} </td>
-    <td> {{$record->name}} </td>
+    <td> {{$record->id}}  </td>
+
+
+    <td @mouseover="open = true"  x-data="{ open: false }"  @mouseleave="open = false"> {{$record->name}}
+
+         <!-- Modal Trigger -->
+
+
+
+         <i
+         x-show="open"
+            href="#modal1"
+            onclick="fetchHindiRecord( {{$record->id}} , 'name' )"
+            class="modal-trigger tiny material-icons">edit</i>
+
+
+
+
+     </td>
     <td> {{$record->code}} </td>
 
     <td>
@@ -18,3 +35,5 @@
 
     </td>
 </tr>
+
+

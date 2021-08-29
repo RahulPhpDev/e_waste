@@ -18,7 +18,7 @@ class CategoryResource extends JsonResource
             "id" =>  $this->id,
             "name" =>   $this->name,
             "description" =>  $this->description,
-            'image' => $this->when(is_array($this->image), !is_array($this->image) ? '' :$this->image['url']),
+            'image' => !is_array($this->image) ? '' :$this->image['url'],
 
         ];
     }

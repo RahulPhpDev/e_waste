@@ -17,7 +17,8 @@
         "laravel/framework": "^7.29",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
-        "laravel/ui": "^2.5"
+        "laravel/ui": "^2.5",
+        "stichoza/google-translate-php": "^4.1"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",

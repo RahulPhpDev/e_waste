@@ -230,6 +230,17 @@
         </div>
     </div>
 </div>
+
+
+ <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content" id = "modal-content">
+
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+    </div>
+  </div>
 <!--/ Theme Customizer -->
 
 <script src ="{{ URL::asset('admin-assets/js/plugins.js') }}"/></script>
@@ -244,9 +255,37 @@
 <!-- <script src ="{{ URL::asset('admin-assets/js/ckeditor.js') }}"/></script> -->
  <script src="https://cdn.ckeditor.com/4.16.1/standard/ckeditor.js"></script>
 
-
 <script>
     CKEDITOR.replace('description' );
+
+//   config.font_names = 'Arial;Times New Roman;Verdana;' +  CKEDITOR.config.font_names;
+
+// config.toolbar_Full =
+// [
+//      { name: 'basicstyles', items : [ 'Bold','Italic','Underline','Strike','Subscript','Superscript','-','RemoveFormat' ] },
+
+//     { name: 'paragraph', items : [ 'Outdent','Indent','-','Blockquote','CreateDiv','-',
+//                 'JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','BidiLtr','BidiRtl' ] }
+
+// ];
+
+// config.toolbar = 'Full';
+// CKEDITOR.config.font_names = 'Arial/Arial, Helvetica, sans-serif;' +
+//     'Comic Sans MS/Comic Sans MS, cursive;' +
+//     'Courier New/Courier New, Courier, monospace;' +
+//     'Georgia/Georgia, serif;' +
+//     'Lucida Sans Unicode/Lucida Sans Unicode, Lucida Grande, sans-serif;' +
+//     'Tahoma/Tahoma, Geneva, sans-serif;' +
+//     'Times New Roman/Times New Roman, Times, serif;' +
+//     'Trebuchet MS/Trebuchet MS, Helvetica, sans-serif;' +
+//     'Verdana/Verdana, Geneva, sans-serif';
+
+// CKEDITOR.editorConfig = function( config ) {
+//     config.language = 'es';
+//     config.uiColor = '#F7B42C';
+//     config.height = 300;
+//     config.toolbarCanCollapse = true;
+// };
 </script>
 
 
