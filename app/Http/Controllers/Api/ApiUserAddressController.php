@@ -32,7 +32,7 @@ class ApiUserAddressController extends Controller
      */
     public function store(UserAddressRequest $request)
     {
-      $address = UserAddress::create( $request->storeInAddress() );
+      $address = UserAddress::create( $request->storeInAddress() )->translate();
       return new UserAddressResource($address);
     }
 
@@ -57,7 +57,7 @@ class ApiUserAddressController extends Controller
     public function update(UserAddressRequest $request, int $id)
     {
 
-      $address = tap(UserAddress::whereId($id))->update( $request->storeInAddress()) ->first()  ;
+      $address = tap(UserAddress::whereId($id))->update( $request->storeInAddress())->translate() ->first()  ;
       return new UserAddressResource($address);
     }
 

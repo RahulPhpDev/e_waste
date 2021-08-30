@@ -44,7 +44,9 @@ class ArticleController extends Controller
      */
     public function store(ArticleRequest $request)
     {
-    $article = Article::create(  $request->createArticle() );
+    $article = Article::create(  $request->createArticle() )
+                ->translate();
+
     if ( $request->hasFile('video') &&
             $request->file('video')->isValid()
         )
@@ -111,8 +113,9 @@ class ArticleController extends Controller
      */
     public function update(ArticleRequest $request,  Article $article)
     {
+     $article->update(  $request->updateArticle() );
 
-    $article->update(  $request->updateArticle() );
+    $article->translate();
     return redirect()->route('admin.article.index')->with('success',FlashMessagesEnum::UpdateMsg);;
     }
 
@@ -216,6 +219,29 @@ class ArticleController extends Controller
 
 
         return redirect()->route('admin.article.index')->with('success',FlashMessagesEnum::CreatedMsg);
+
+    }
+
+
+    public function bilingual(Article $article, $field)
+    {
+    return view('admin._common.bilingual',[
+            'record' => $article,
+             'text' => $field,
+             'field' => 'hi_'.$field,
+             'field_value'  =>  $article->{'hi_'.$field},
+             'update_route' => route('admin.article.bilingual', $article->id)
+        ]);
+    }
+
+    public function storeBilingual(Request $request, Article $article)
+    {
+        $final = collect($request->all() )->translatable($article);
+       $article->update($final);
+
+        return redirect()
+                ->route('admin.article.index')
+                ->with('success',FlashMessagesEnum::UpdateMsg);
 
     }
 }

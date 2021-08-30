@@ -64,6 +64,12 @@ Route::group([
    Route::delete('article/video/{id}/destroy', 'ArticleController@videoDelete')->name('article.destroy.video');
    Route::delete('article/image/{id}/destroy', 'ArticleController@imageDelete')->name('article.destroy.image');
 
+  Route::get('article/bilingual/{article?}/{field?}', 'ArticleController@bilingual')->name('article.bilingual');
+   Route::put('article/bilingual/{article?}', 'ArticleController@storeBilingual')
+            ->name('article.bilingual');
+
+
+
    Route::any('article/image/{id}/store', 'ArticleController@imageUpdate')->name('article.image.store');
    Route::any('article/video/{id}/store', 'ArticleController@videoUpdate')->name('article.video.store');
 

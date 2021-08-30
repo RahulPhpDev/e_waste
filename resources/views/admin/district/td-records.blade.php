@@ -3,11 +3,6 @@
 
 
     <td @mouseover="open = true"  x-data="{ open: false }"  @mouseleave="open = false"> {{$record->name}}
-
-         <!-- Modal Trigger -->
-
-
-
          <i
          x-show="open"
             href="#modal1"

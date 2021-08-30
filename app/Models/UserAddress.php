@@ -4,14 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\TranslatorTrait;
 
 class UserAddress extends Model
 {
-	use SoftDeletes;
+	use SoftDeletes, TranslatorTrait;
 
 	 protected $guarded = [];
 
-
+	public $translatable = ['flat', 'area', 'landmark'];
 
 	 public function district()
 	 {

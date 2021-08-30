@@ -35,15 +35,16 @@ class ApiUserProfileController extends Controller
         $user=   User::with(['address' => function ($query) {
             $query->where('active', 1)->latest();
         }])->findOrFail(Auth::id() );
-        $user->update( $request->all() );
+        $user->update( $request->storeInProfile() );
 
-        // // dd($user->address );
+         $user->translate();
         if ( $user->address === null )
         {
 
-            $address = $user->address()->save( new UserAddress($request->storeInAddress() ) );
+            $address = $user->address()->save( new UserAddress($request->storeInAddress() ) )->translate();
         } else {
             $address =  $user->address->update( $request->storeInAddress() );
+            $user->address->translate();
         }
 
 

@@ -1,8 +1,22 @@
 <tr>
     <td> {{$record->id}} </td>
-    <td> {{$record->title}} </td>
-    <td> {!! Str::of($record->description)->limit(20) !!} </td>
+    <td @mouseover="open = true"  x-data="{ open: false }"  @mouseleave="open = false">
+        {{$record->title}}
+         <i
+         x-show="open"
+            href="#modal1"
+            onclick="fetchHindiRecord( {{$record->id}} , 'title' )"
+            class="modal-trigger tiny material-icons">edit</i>
 
+     </td>
+    <td @mouseover="des_open = true" x-data ="{des_open: false}"
+    @mouseleave="des_open = false"> {!! Str::of($record->description)->limit(20) !!}
+     <i
+         x-show="des_open"
+            href="#modal1"
+            onclick="fetchHindiRecord( {{$record->id}} , 'description' )"
+            class="modal-trigger tiny material-icons">edit</i>
+  </td>
 
 
 

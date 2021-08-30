@@ -7,19 +7,21 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\{Role, Scrap, Zone, UserAddress,Image};
+use App\Traits\TranslatorTrait;
 
 class User extends Authenticatable
 {
-    use Notifiable, HasApiTokens;
+    use Notifiable, HasApiTokens, TranslatorTrait;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = [
-        'name', 'email', 'password','role_id', 'active', 'phone'
-    ];
+    // protected $fillable = [
+    //     'name', 'email', 'password','role_id', 'active', 'phone'
+    // ];
+    protected $guarded = [];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -38,6 +40,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public $translatable = ['name'];
 
     public $with = ['role'];
 

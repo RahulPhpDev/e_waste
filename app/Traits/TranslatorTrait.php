@@ -18,8 +18,7 @@ trait TranslatorTrait
 
 	  	foreach ( $this->translatable ?? []  as $key => $value )
 		{
-// dd($translate::trans($this->{$value}), $value );
-// dd($translate::trans($this->{$value}, 'hi', 'en'), $this->translatable );
+
 			if ( $this->guarded() ||  $this->isFillableAttribute( $value ) )
 			{
 				if ( $this->{$value} ) {

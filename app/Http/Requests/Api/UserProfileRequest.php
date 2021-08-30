@@ -38,6 +38,7 @@ class UserProfileRequest extends FormRequest
     {
         $this->merge([
             'active' => 1,
+            'role_id' => 3
         ]);
     }
 
@@ -53,6 +54,16 @@ class UserProfileRequest extends FormRequest
            'landmark',
            'lattitude',
            'longitute'
+       );
+    }
+
+    public function storeInProfile()
+    {
+        return $this->only(
+          'name',
+          'email',
+          'role_id',
+          'phone'
        );
     }
 }

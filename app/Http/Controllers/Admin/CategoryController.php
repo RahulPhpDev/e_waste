@@ -134,7 +134,7 @@ class CategoryController extends Controller
 
     public function storeBilingual(Request $request, Category $category)
     {
-        $final= collect($category->translatable)->filter( function($value) use ( $request) {
+      $final= collect($category->translatable)->filter( function($value) use ( $request) {
             return Arr::exists($request->all()  ,  'hi_'.$value );
         })->map( function ($rec)  {
             return 'hi_'.$rec;

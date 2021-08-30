@@ -5,13 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
-
+use App\Traits\TranslatorTrait;
 
 class Article extends Model
 {
-	use SoftDeletes;
+	use SoftDeletes, TranslatorTrait;
 
 	 protected $guarded = [];
+
+	 public $translatable = ['title', 'description'];
 
 
 	public function image()

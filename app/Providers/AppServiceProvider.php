@@ -8,6 +8,9 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Pagination\Paginator;
 //use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Arr;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -34,6 +37,12 @@ class AppServiceProvider extends ServiceProvider
             'product' => 'App\Models\Product',
             'inventory' => 'App\Models\Inventory',
         ]);
+
+        Collection::macro('translatable', function ( $model) {
+            return $this->filter( function ($request, $key) use ($model) {
+                return in_array( str_replace('hi_', '', $key), $model->translatable  );
+            })->all();
+        });
 
 //        Builder::macro('createOrUpdateWithPrimaryKey', function ($attributes, $values) {
 //

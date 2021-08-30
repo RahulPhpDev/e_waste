@@ -17,7 +17,7 @@ class ZoneResource extends JsonResource
         return [
             "id" => $this->id,
             "district_id" => $this->district_id,
-            "name" => $this->name,
+            "name" => $request->lang == 'hi' ? $this->hi_name : $this->name,
             "zip_code" => $this->zip_code,
             "lattitude" => $this->lattitude,
             "longitute" => $this->longitute,
@@ -25,7 +25,7 @@ class ZoneResource extends JsonResource
             "landmark" => $this->landmark,
             "district" => [
                "id" => $this->district->id,
-                "name" => $this->district->name,
+                "name" => $request->lang == 'hi' ?  $this->district->hi_name : $this->district->name,
                 "code" => $this->district->code,
             ]
         ];
