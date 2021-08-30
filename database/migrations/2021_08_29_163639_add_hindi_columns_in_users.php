@@ -25,7 +25,7 @@ class AddHindiColumnsInUsers extends Migration
               $this->addTranslateColoum($table)->add('landmark')->after('landmark')->nullable();
         });
 
-        Artisan::call('db:seed' , ['--class' => TranslateUserSeeder::class ]);
+        // Artisan::call('db:seed' , ['--class' => TranslateUserSeeder::class ]);
     }
 
     /**
