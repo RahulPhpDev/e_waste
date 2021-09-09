@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\District;
 use Illuminate\Http\Request;
 use App\Http\Resources\Api\DistrictResource;
+use App\Models\Zone;
+use App\Http\Resources\Api\ZoneResource;
 
 class ApiDistrictController extends Controller
 {
@@ -21,5 +23,13 @@ class ApiDistrictController extends Controller
                     'sucess' => true
                 ]);
     }
-
+    
+    public function detail($id)
+    {
+     return  ZoneResource::collection(  Zone::where('district_id',$id)->get() )
+                ->additional([
+                        'sucess' => true
+                    ]);
+         
+    }
 }
