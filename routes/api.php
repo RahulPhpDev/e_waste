@@ -36,6 +36,7 @@ Route::group([
     Route::post('register', 'RegisterController@create')->withoutMiddleware('auth:sanctum');
     Route::get('category','ApiCategoryController@index' );
     Route::get('district','ApiDistrictController@index' );
+    Route::get('district/{id}','ApiDistrictController@detail');
     Route::get('zone','ApiZoneController@index' );
     Route::get('inventory','ApiInventoryController@index' );
     Route::get('type','ApiProductTypeController@index' );
