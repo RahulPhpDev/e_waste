@@ -43,8 +43,8 @@ class ZoneController extends Controller
      */
     public function store(ZoneRequest $request)
     {
-        Zone::create( $request->only('name','zip_code', 'lattitude', 'longitute', 'landmark', 'district_id') );
-        return redirect()->route('admin.zone.index');
+       Zone::create( $request->only('name','zip_code', 'lattitude', 'longitute', 'landmark', 'district_id', 'address', 'description', 'phone_number') );
+       return redirect()->route('admin.zone.index');
     }
 
     /**
@@ -82,7 +82,9 @@ class ZoneController extends Controller
      */
     public function update(ZoneRequest $request, Zone $zone)
     {
-        $zone->update( $request->only('name','zip_code', 'lattitude', 'longitute', 'landmark', 'district_id') );
+      $zone->update(
+            $request->only('name','zip_code', 'lattitude', 'longitute', 'landmark', 'district_id', 'address', 'description', 'phone_number')
+        );
         return redirect()->route('admin.zone.index')->with('success',FlashMessagesEnum::CreatedMsg);;
 
     }
