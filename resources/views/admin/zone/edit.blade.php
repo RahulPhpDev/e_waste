@@ -27,6 +27,17 @@
                         </div>
 
 
+
+                        <div class="input-field col m6 s6">
+                            <label for="address" class="active"> Address </label>
+                            <input id="address" value="{{ $record->address }}" type="text" class = 'validate' name = 'address'>
+
+                            @error('address')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+
                         <div class="input-field col m6 s6">
                              <label for="icon_prefix2" class="active"> Code </label>
 
@@ -40,6 +51,15 @@
                     </div>
 
                     <div class="row">
+
+                        <div class="input-field col m6 s6">
+                            <label for="address" class="active"> Phone Number </label>
+                            <input id="phone_number"  value = "{{$record->phone_number}}" type="text" class = 'validate' name = 'phone_number'>
+
+                            @error('phone_number')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
 
                          <div class="input-field col m6 s6">
                              <label for="lattitude" class="active"> Lattitude </label>
@@ -87,6 +107,9 @@
 
 
 
+
+
+
                         <div class="input-field col m6 s6">
 
 
@@ -97,6 +120,22 @@
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
+
+
+
+                    </div>
+
+                    <div class = "row">
+                        <div class="input-field col m12 s12">
+                            <label for="address" class="active"> Description </label>
+                            <br />
+                            <input id="description" value = "{{ $record->description }}" type="text" class = 'validate' name = 'description'>
+
+                            @error('description')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
                     </div>
 
                     <div class="row">
