@@ -14,7 +14,7 @@ class Zone extends Model
 
 	 public $with = ['district'];
 
-	 public $translatable = ['name', 'landmark'];
+	  public $translatable = ['name', 'landmark', 'description', 'address'];
 
 
 	 public function district()
