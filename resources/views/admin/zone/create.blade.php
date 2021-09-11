@@ -27,6 +27,16 @@
 
 
                         <div class="input-field col m6 s6">
+                            <label for="address" class="active"> Address </label>
+                            <input id="address" type="text" class = 'validate' name = 'address'>
+
+                            @error('address')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+
+                        <div class="input-field col m6 s6">
                              <label for="icon_prefix2" class="active"> Code </label>
 
                             <input id="icon_prefix2" type="text" class = 'validate' name = 'zip_code'>
@@ -39,6 +49,16 @@
                     </div>
 
                     <div class="row">
+
+
+                        <div class="input-field col m6 s6">
+                            <label for="address" class="active"> Phone Number </label>
+                            <input id="phone_number" type="text" class = 'validate' name = 'phone_number'>
+
+                            @error('phone_number')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
 
                          <div class="input-field col m6 s6">
                              <label for="lattitude" class="active"> Lattitude </label>
@@ -96,9 +116,24 @@
                         </div>
                     </div>
 
+
+
+
+
+
                     <div class="row">
 
+                        <div class="input-field col m12 s12">
+                            <label for="address" class="active"> Description </label> <br /> <br />
+                            <input id="description" type="text" class = 'validate' name = 'description'>
 
+                            @error('description')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class = "row">
 
                         <div class="input-field col m4 s12">
                             <div class="input-field col s12">
