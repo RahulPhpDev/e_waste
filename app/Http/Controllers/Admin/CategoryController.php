@@ -132,6 +132,42 @@ class CategoryController extends Controller
     }
 
 
+    public function editImage(Category $category)
+    {
+        return view('admin.category.edit-image', ['record' => $category ]);
+
+    }
+
+    function updateImage(Request $request, Category $category)
+    {
+
+        if ( $request->hasFile('image') &&
+                $request->file('image')->isValid()
+            )
+            {
+                 $validated = $request->validate([
+                        'image' => 'mimes:jpeg,png,jpg,svg|max:5014',
+                    ]);
+
+                $path =  $request->file('image')
+                                    ->storeAs('public/category/',
+                                        $category->id.'.'.$request->image->extension()
+                                    );
+                if ( is_null($category->image  ) )
+                {
+                 $category->image()->create([
+                        'url' => $path,
+                    ]);
+             }
+         } else {
+            return redirect()->route('admin.category.index')->with('error','Not able to upload');
+         }
+
+        return redirect()->route('admin.category.index')->with('success',FlashMessagesEnum::UpdateMsg);
+    }
+
+
+
     public function storeBilingual(Request $request, Category $category)
     {
       $final= collect($category->translatable)->filter( function($value) use ( $request) {

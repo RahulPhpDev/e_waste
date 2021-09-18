@@ -53,6 +53,8 @@ Route::group([
    Route::put('category/bilingual/{category?}', 'CategoryController@storeBilingual')
             ->name('category.bilingual');
 
+   Route::get('category/edit-image/{category}', 'CategoryController@editImage')->name('category.image-edit');      
+   Route::put('category/edit-image/{category?}', 'CategoryController@updateImage')->name('category.update-image');      
    Route::resource('zone', 'ZoneController');
    Route::resource('product', 'ProductController');
 
