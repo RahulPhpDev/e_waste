@@ -24,14 +24,14 @@ class SellRequest extends FormRequest
     public function rules()
     {
         return [
-           'category_id' => 'required',
+           'category_id.*' => 'required',
            'user_name' => 'required',
-           'name' => 'required',
+           'name.*' => 'required',
            'zone_id' => 'required',
            'phone' => 'required',
-           'quantity' => 'required',
+           'quantity.*' => 'required',
            'type' => 'required',
-           'price' => 'required',
+           'price.*' => 'required',
            'landmark' => 'required',
            'date' => 'required',
            'time' => 'required',
@@ -54,7 +54,25 @@ class SellRequest extends FormRequest
 
     public function storeInScrap()
     {
-        return $this->only('user_id','name', 'user_name', 'phone', 'category_id', 'price', 'quantity', 'zone_id', 'type');
+        // return $this->only('user_id','name', 'user_name', 'phone', 'category_id', 'price', 'quantity', 'zone_id', 'type');
+        return $this->only('user_id', 'user_name', 'phone',  'zone_id', 'type');
+    }
+
+    public function storeInScrapProduct($index)
+    {
+
+        $data =$this->only(
+            'product.name.'.$index,
+             'product.category_id.'.$index,
+              'product.price.'.$index, 
+              'product.quantity.'.$index,
+      );
+       
+       $final= [];
+      foreach( collect($data)->values()->values()->first() as $key => $value) {
+        $final[$key] = $value && array_values($value) ? array_values($value)[0] : null;
+      }
+      return $final;
     }
 
     public function storeInSchedule()

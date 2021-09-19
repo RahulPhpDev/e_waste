@@ -45,11 +45,17 @@ class Scrap extends Model
 	 	return $this->hasOne(Schedule::class)->withDefault();
 	 }
 
-
-	 public function image()
+	  public function scrapproducts()
 	 {
-	 	return $this->morphOne(Image::class, 'imageable');
+	 	return $this->hasMany(ScrapProduct::class);
 	 }
+
+	 // public function products()
+	 // {
+	 // 	return $this->belongsToMany(Product::class, 'scrap_product')->withPivot('name', 'quantity', 'price');
+	 // }
+
+
 
 
     //

@@ -14,18 +14,27 @@ class ScrapSellingOrderResource extends JsonResource
      */
     public function toArray($request)
     {
+        $images = [];
+        foreach ($this->scrapproducts as $key => $value) {
+            if ($value->image )
+            {
+                $images[$value->image->id] = !is_null($value->image) ?   'storage/'.$value->image->url : '';
+            }
+            
+        }
        $scheduleCount = $this->schedule ?count($this->schedule->toArray()) : 1;
         return [
             'user' => $this->name,
             'user_name' => $this->user_name,
             'phone' => $this->phone,
-            'quantity' => $this->quantity,
-            'price' => $this->price,
-            'category' => new CategoryResource($this->category),
-            'user_address' => new UserAddressResource($this->user_address),
+            'product' => new ScrapProductCollection($this->scrapproducts),
+            // 'quantity' => $this->quantity,
+            // 'price' => $this->price,
+            // 'category' => new CategoryResource($this->category),
+            'user_address' => $this->load('userAddress'),
             'schedule' => $this->when( $scheduleCount > 1, $this->schedule),
-            'image' =>  $this->when( $this->image, 'storage/'.$this->image->url),
-            'zone' =>$this->when($this->zone, new ZoneResource($this->zone))
+            'image' => $images,
+            //'zone' =>$this->when($this->zone, new ZoneResource($this->zone))
         ];
     }
 
