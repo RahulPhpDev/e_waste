@@ -24,14 +24,14 @@ class SellRequest extends FormRequest
     public function rules()
     {
         return [
-           'category_id.*' => 'required',
+           'category_id' => 'required',
            'user_name' => 'required',
-           'name.*' => 'required',
+           'name' => 'required',
            'zone_id' => 'required',
            'phone' => 'required',
-           'quantity.*' => 'required',
+           'quantity' => 'required',
            'type' => 'required',
-           'price.*' => 'required',
+           'price' => 'required',
            'landmark' => 'required',
            'date' => 'required',
            'time' => 'required',
@@ -43,6 +43,8 @@ class SellRequest extends FormRequest
            'user_address_id'
         ];
     }
+
+
 
     public function prepareForValidation()
     {
@@ -58,7 +60,7 @@ class SellRequest extends FormRequest
         return $this->only('user_id', 'user_name', 'phone',  'zone_id', 'type');
     }
 
-    public function storeInScrapProduct($index)
+    public function storeInScrapProductArray($index) // when record in array
     {
 
         $data =$this->only(
@@ -74,6 +76,25 @@ class SellRequest extends FormRequest
       }
       return $final;
     }
+
+    public function storeInScrapProduct()
+    {
+
+        return $this->only(
+            'name',
+             'category_id',
+              'price', 
+              'quantity'
+      );
+       
+      //  $final= [];
+      // foreach( collect($data)->values()->values()->first() as $key => $value) {
+      //   $final[$key] = $value && array_values($value) ? array_values($value)[0] : null;
+      // }
+      // return $final;
+    }
+
+
 
     public function storeInSchedule()
     {

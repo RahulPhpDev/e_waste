@@ -29,24 +29,24 @@ class SellController extends Controller
                     $scrap->user_address_id = $userAddress->id;
                     $scrap->save();
                     $scrap->schedule()->create( $request->storeInSchedule() );
-                    for($i=0; $i  < count($request->product['name']); $i++)
-                    {
+                    // for($i=0; $i  < count($request->product['name']); $i++)
+                    // {
                       $scrapProduct = $scrap->scrapproducts()
-                        ->create($request->storeInScrapProduct($i)); 
+                        ->create($request->storeInScrapProduct()); 
                    
-                    if ( $request->hasFile('product.image.'.$i) &&
-                        $request->file('product.image.'.$i)->isValid()
+                    if ( $request->hasFile('image') &&
+                        $request->file('image')->isValid()
                     )
                     {
                          $validated = $request->validate([
-                                'product.image.'.$i => 'mimes:jpeg,png,svg|max:5014',
+                                'image' => 'mimes:jpeg,png,svg|max:5014',
                             ]);
-                       // dd($request->file('product.image.'.$i)->extension());
+                       // dd($request->file('image')->extension());
                         $path =  $request
-                        ->file('product.image.'.$i)
+                        ->file('image')
                                             ->storeAs('public/scrap/',
                                                 $scrapProduct->id.'.'.
-                                                    $request->file('product.image.'.$i)->extension()
+                                                    $request->file('image')->extension()
                                             );
 
                             $scrapProduct->image()->create([
@@ -54,7 +54,7 @@ class SellController extends Controller
                             ]);
 
                     }
-                }
+                // }
 
                     DB::commit();
               return new ScrapSellingOrderResource($scrap);
