@@ -10,7 +10,7 @@ use Illuminate\Pagination\Paginator;
 //use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Arr;
-
+use Validator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -61,6 +61,17 @@ class AppServiceProvider extends ServiceProvider
 //                $instance->save();
 //            });
 //        });
+
+        Validator::extend('ogg_extension', function($attribute, $value, $parameters, $validator) {
+             
+            if(!empty($value->getClientOriginalExtension()) && ($value->getClientOriginalExtension() == 'ogg')){
+                return true;
+            }else{
+                return false;
+            }
+             
+        });
+    
 
     }
 }

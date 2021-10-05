@@ -54,7 +54,24 @@ Route::group([
             ->name('category.bilingual');
 
    Route::get('category/edit-image/{category}', 'CategoryController@editImage')->name('category.image-edit');      
-   Route::put('category/edit-image/{category?}', 'CategoryController@updateImage')->name('category.update-image');      
+   Route::put('category/edit-image/{category?}', 'CategoryController@updateImage')->name('category.update-image');   
+
+
+//===== Sub category ==
+    Route::resource('sub-category', 'SubCategoryController');
+
+      Route::get('sub-category/bilingual/{subcategory?}/{field?}', 'SubCategoryController@bilingual')->name('sub-category.bilingual');
+
+
+   Route::put('sub-category/bilingual/{subcategory?}', 'SubCategoryController@storeBilingual')
+            ->name('sub-category.bilingual');
+
+   Route::get('sub-category/edit-image/{id}', 'SubCategoryController@editImage')->name('sub-category.image-edit');   
+
+   Route::put('sub-category/edit-image/{subcategory?}', 'SubCategoryController@updateImage')->name('sub-category.update-image');   
+
+
+
    Route::resource('zone', 'ZoneController');
    Route::resource('product', 'ProductController');
 
@@ -82,6 +99,15 @@ Route::group([
 
    Route::any('event/image/{id}/store', 'EventController@imageUpdate')->name('event.image.store');
    Route::any('event/video/{id}/store', 'EventController@videoUpdate')->name('event.video.store');
+
+   // Route::resource('video', 'VideoController');
+   // Route::delete('video/video/{id}/destroy', 'VideoController@videoDelete')->name('video.destroy.video');
+   // Route::delete('video/image/{id}/destroy', 'VideoController@imageDelete')->name('video.destroy.image');
+
+
+
+   // Route::any('video/image/{id}/store', 'VideoController@imageUpdate')->name('video.image.store');
+   // Route::any('video/video/{id}/store', 'VideoController@videoUpdate')->name('video.video.store');
 
 });
 

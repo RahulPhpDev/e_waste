@@ -22,6 +22,7 @@ Route::group([
 'namespace' => 'Guest'
 ], function () {
        Route::get('why-we','HomePageController@whyWe' );
+        // Route::get('sub-category','ApiSubCategoryController@index' );
 });
 
 Route::group([
@@ -35,6 +36,7 @@ Route::group([
     Route::post('login', 'LoginApiController@login')->withoutMiddleware('auth:sanctum');;
     Route::post('register', 'RegisterController@create')->withoutMiddleware('auth:sanctum');
     Route::get('category','ApiCategoryController@index' );
+    Route::get('sub-category','ApiSubCategoryController@index' );
     Route::get('district','ApiDistrictController@index' );
     Route::get('district/{id}','ApiDistrictController@detail');
     Route::get('zone','ApiZoneController@index' );

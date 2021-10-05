@@ -25,6 +25,11 @@
                     link='admin.category.index'
                     icon="category"
                 />
+                <x-admin.navigation
+                    names='Sub Category'
+                    link='admin.sub-category.index'
+                    icon="category"
+                />
                   <x-admin.navigation
                     names='Type'
                     link='admin.type.index'
@@ -52,6 +57,8 @@
                     link='admin.article.index'
                     icon="add_shopping_cart"
                 />
+
+             
 
     </ul>
 </aside>
