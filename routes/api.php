@@ -35,6 +35,9 @@ Route::group([
     Route::post('login', 'LoginApiController@login')->withoutMiddleware('auth:sanctum');;
     Route::post('register', 'RegisterController@create')->withoutMiddleware('auth:sanctum');
     Route::get('category','ApiCategoryController@index' );
+    Route::get('category/{id?}/sub-category','ApiCategoryController@subcateogry' );
+    
+
     Route::get('sub-category','ApiSubCategoryController@index' );
     Route::get('district','ApiDistrictController@index' );
     Route::get('district/{id}','ApiDistrictController@detail');

@@ -15,6 +15,11 @@ class Category extends Model
 	 public $translatable = ['name', 'description'];
 
 
+	public function subCategory(){
+		return $this->hasMany(SubCategory::class);
+	} 
+
+
 	public function image()
 	{
 		return $this->morphOne(Image::class, 'imageable');

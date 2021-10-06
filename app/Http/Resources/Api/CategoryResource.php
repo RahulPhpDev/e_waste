@@ -14,14 +14,17 @@ class CategoryResource extends JsonResource
      */
     public function toArray($request)
     {
-        // dump($this->image);
+   
 
-        return  [
+    return  [
             "id" =>  $this->id,
             "name" =>  $request->lang == 'hi' ?  $this->hi_name: $this->name,
             "description" =>  $request->lang == 'hi' ? $this->hi_description : $this->description,
             'image' => is_null($this->image) ? '' :'storage/'.$this->image['url'],
-        ];
+            $this->mergeWhen($this->subCategory, [
+                'subCategory' => $this->subCategory
+            ]),
+        ] ;
     }
 
     /**
