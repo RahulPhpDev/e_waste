@@ -22,7 +22,6 @@ Route::group([
 'namespace' => 'Guest'
 ], function () {
        Route::get('why-we','HomePageController@whyWe' );
-        // Route::get('sub-category','ApiSubCategoryController@index' );
 });
 
 Route::group([
@@ -46,4 +45,5 @@ Route::group([
     Route::apiResource('user-address', 'ApiUserAddressController');
     Route::apiResource('scrap-order', 'ScrapSellingOrderController');
     Route::apiResource('profile', 'ApiUserProfileController');
+    Route::get('video','ApiVideoController@index' );
     });

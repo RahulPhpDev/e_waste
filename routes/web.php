@@ -1,4 +1,4 @@
-<?php
+   <?php
 
 use Illuminate\Support\Facades\Route;
 
@@ -100,14 +100,10 @@ Route::group([
    Route::any('event/image/{id}/store', 'EventController@imageUpdate')->name('event.image.store');
    Route::any('event/video/{id}/store', 'EventController@videoUpdate')->name('event.video.store');
 
-   // Route::resource('video', 'VideoController');
-   // Route::delete('video/video/{id}/destroy', 'VideoController@videoDelete')->name('video.destroy.video');
-   // Route::delete('video/image/{id}/destroy', 'VideoController@imageDelete')->name('video.destroy.image');
-
-
-
-   // Route::any('video/image/{id}/store', 'VideoController@imageUpdate')->name('video.image.store');
-   // Route::any('video/video/{id}/store', 'VideoController@videoUpdate')->name('video.video.store');
+   Route::resource('video', 'VideoController');
+   Route::get('video/bilingual/{video?}/{field?}', 'VideoController@bilingual')->name('video.bilingual');
+   Route::put('video/bilingual/{video?}', 'VideoController@storeBilingual')
+            ->name('video.bilingual');
 
 });
 

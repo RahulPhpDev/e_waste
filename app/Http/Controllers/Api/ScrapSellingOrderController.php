@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\Api\ScrapSellingOrderResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\User;
+use App\Models\Scrap;
 
 class ScrapSellingOrderController extends Controller
 {

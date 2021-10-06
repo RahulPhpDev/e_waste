@@ -14,6 +14,13 @@ class Scrap extends Model
 
 	 protected $with = ['userAddress', 'category','schedule','zone'];
 
+
+	 public function user()
+	 {
+	 	return $this->belongsTo(User::class, 'user_id');
+	 }
+
+
 	 public function scrapOwner()
 	 {
 	 	return $this->belongsTo(User::class, 'user_id');

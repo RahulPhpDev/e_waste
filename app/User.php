@@ -72,6 +72,11 @@ class User extends Authenticatable
         return $this->hasMany(Scrap::class);
     }
 
+    public function scrap()
+    {
+        return $this->hasOne(Scrap::class);
+    }
+
 
     public function image()
     {

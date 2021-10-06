@@ -32,7 +32,7 @@ class ScrapSellingOrderResource extends JsonResource
             // 'price' => $this->price,
             // 'category' => new CategoryResource($this->category),
             'user_address' => $this->load('userAddress'),
-            'schedule' => $this->when( $scheduleCount > 1, $this->schedule),
+            // 'schedule' => $this->when( $scheduleCount > 1, $this->schedule),
             'image' => $images,
             //'zone' =>$this->when($this->zone, new ZoneResource($this->zone))
         ];

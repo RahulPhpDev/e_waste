@@ -57,6 +57,11 @@
                     link='admin.article.index'
                     icon="add_shopping_cart"
                 />
+                 <x-admin.navigation
+                    names='Video'
+                    link='admin.video.index'
+                    icon="video"
+                />
 
              
 
