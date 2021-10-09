@@ -20,6 +20,15 @@ class ScrapSellingOrderController extends Controller
     public function index()
     {
         $scrap = Auth::user()->scrapOrder()->get();
+
+        // $images = [];
+        // foreach ($this->scrapproducts as $key => $value) {
+        //     if ($value->image )
+        //     {
+        //         $images[$value->image->id] = !is_null($value->image) ?   'storage/'.$value->image->url : '';
+        //     }
+            
+        // }
         return  ScrapSellingOrderResource::collection($scrap);
 
     }
