@@ -14,11 +14,11 @@ class ScrapSellingOrderResource extends JsonResource
      */
     public function toArray($request)
     {
-        $images = [];
+        $images = '';
         foreach ($this->scrapproducts as $key => $value) {
             if ($value->image )
             {
-                $images[$value->image->id] = !is_null($value->image) ?   'storage/'.$value->image->url : '';
+                $images = !is_null($value->image) ?   'storage/'.$value->image->url : '';
             }
             
         }
