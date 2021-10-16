@@ -12,6 +12,13 @@ class ScrapProduct extends Model
 
 	public $table = 'scrap_product';
 
+	// protected $casts = [
+	//     'scrap_id' => 'integer',
+	//     'category_id'=> 'integer',
+	//     'quantity'=> 'integer',
+	//     'status'=> 'integer'
+	// ];
+
 	 protected $guarded = [];
 
  	 public $translatable = ['name', 'description'];

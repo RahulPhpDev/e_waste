@@ -22,6 +22,7 @@ Route::group([
 'namespace' => 'Guest'
 ], function () {
        Route::get('why-we','HomePageController@whyWe' );
+       Route::get('sstore','HomePageController@store' );
 });
 
 Route::group([

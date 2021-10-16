@@ -14,5 +14,8 @@ class Schedule extends Model
 
 	 public $timestamps = FALSE;
 
-    //
+ //    protected $casts = [
+	//     'date' => 'date',
+	//     'time'=> 'time'
+	// ];
 }

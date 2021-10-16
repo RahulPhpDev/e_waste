@@ -21,7 +21,7 @@ class SellController extends Controller
              try {
                      if ( !$request->user_address_id )
                      {
-                            $userAddress = \Auth::user()->address()->create( $request->storeInAddress());
+                        $userAddress = \Auth::user()->address()->create( $request->storeInAddress());
                      } else {
                          $userAddress = UserAddress::findOrFail($request->user_address_id);
                      }
@@ -43,11 +43,11 @@ class SellController extends Controller
                             ]);
                        // dd($request->file('image')->extension());
                         $path =  $request
-                        ->file('image')
-                                            ->storeAs('public/scrap/',
-                                                $scrapProduct->id.'.'.
-                                                    $request->file('image')->extension()
-                                            );
+                                ->file('image')
+                                ->storeAs('public/scrap/',
+                                    $scrapProduct->id.'.'.
+                                        $request->file('image')->extension()
+                                );
 
                             $scrapProduct->image()->create([
                                 'url' => $path,
@@ -57,11 +57,14 @@ class SellController extends Controller
                 // }
 
                     DB::commit();
-              return new ScrapSellingOrderResource($scrap);
+                return response()->json([
+                    'success' => 'true'
+                ]);
+              // return new ScrapSellingOrderResource($scrap);
              } catch (\Exception $e) {
                  DB::rollBack();
                 return response()->json([
-                    'success' => false,
+                    'success' => 'false',
                     'msg' => $e->getMessage()
                 ]);
              }

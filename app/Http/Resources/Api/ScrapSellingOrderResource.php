@@ -36,7 +36,7 @@ class ScrapSellingOrderResource extends JsonResource
             'schedule_date' => $this->when( $scheduleCount > 1, $this->schedule->date),
             'schedule_time' => $this->when( $scheduleCount > 1, $this->schedule->time),
             'product_image' => $images,
-            'type' => $this->type === 1 ? 'Sell' : 'Donate' 
+            'type' => $this->type == 1 ? 'Sell' : 'Donate' 
         ];
 
         // return [

@@ -14,10 +14,26 @@ class UserAddress extends Model
 
 	public $translatable = ['flat', 'area', 'landmark'];
 
+	// protected $casts = [
+	//     'district_id' => 'integer',
+	//     'zip_code'=> 'integer'
+	// ];
+
 	 public function district()
 	 {
 	 	return $this->belongsTo(District::class);
 	 }
+
+	public function setDistrictIdAttribute($value)
+    {
+        $this->attributes['district_id'] = (int) $value;
+    }
+
+
+	public function setZipCodeAttribute($value)
+    {
+        $this->attributes['zip_code'] = (int) $value;
+    }
 
 
     //

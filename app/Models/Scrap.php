@@ -12,6 +12,18 @@ class Scrap extends Model
 
 	 protected $guarded = [];
 
+
+	//  protected $casts = [
+	//     'user_id' => 'integer',
+	//     'category_id'=> 'integer',
+	//     'zone_id'=> 'integer',
+	//     'user_address_id'=> 'integer',
+	//     'approved_by'=> 'integer',
+	//     'phone'=> 'integer',
+	//     'status'=> 'integer',
+	//     'type'=> 'integer'
+	// ];
+
 	 protected $with = ['userAddress', 'category','schedule','zone'];
 
 
