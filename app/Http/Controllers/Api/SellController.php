@@ -34,26 +34,26 @@ class SellController extends Controller
                       $scrapProduct = $scrap->scrapproducts()
                         ->create($request->storeInScrapProduct()); 
                    
-                    if ( $request->hasFile('image') &&
-                        $request->file('image')->isValid()
-                    )
-                    {
-                         $validated = $request->validate([
-                                'image' => 'mimes:jpeg,png,svg|max:5014',
-                            ]);
-                       // dd($request->file('image')->extension());
-                        $path =  $request
-                                ->file('image')
-                                ->storeAs('public/scrap/',
-                                    $scrapProduct->id.'.'.
-                                        $request->file('image')->extension()
-                                );
+                    // if ( $request->hasFile('image') &&
+                    //     $request->file('image')->isValid()
+                    // )
+                    // {
+                    //      $validated = $request->validate([
+                    //             'image' => 'mimes:jpeg,png,svg|max:5014',
+                    //         ]);
+                    //    // dd($request->file('image')->extension());
+                    //     $path =  $request
+                    //             ->file('image')
+                    //             ->storeAs('public/scrap/',
+                    //                 $scrapProduct->id.'.'.
+                    //                     $request->file('image')->extension()
+                    //             );
 
-                            $scrapProduct->image()->create([
-                                'url' => $path,
-                            ]);
+                    //         $scrapProduct->image()->create([
+                    //             'url' => $path,
+                    //         ]);
 
-                    }
+                    // }
                 // }
 
                     DB::commit();

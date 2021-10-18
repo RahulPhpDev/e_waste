@@ -84,7 +84,8 @@ class SellRequest extends FormRequest
             'name',
              'category_id',
               'price', 
-              'quantity'
+              'quantity',
+              'image' //new
       );
        
       //  $final= [];

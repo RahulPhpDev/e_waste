@@ -14,14 +14,14 @@ class ScrapSellingOrderResource extends JsonResource
      */
     public function toArray($request)
     {
-        $images = '';
-        foreach ($this->scrapproducts as $key => $value) {
-            if ($value->image )
-            {
-                $images = !is_null($value->image) ?   'storage/'.$value->image->url : '';
-            }
+        // $images = '';
+        // foreach ($this->scrapproducts as $key => $value) {
+        //     if ($value->image )
+        //     {
+        //         $images = !is_null($value->image) ?   'storage/'.$value->image->url : '';
+        //     }
             
-        }
+        // }
        $scheduleCount = $this->schedule ?count($this->schedule->toArray()) : 1;
 
 
@@ -35,7 +35,7 @@ class ScrapSellingOrderResource extends JsonResource
             'quantity' => $prouctCollection['quantity'],
             'schedule_date' => $this->when( $scheduleCount > 1, $this->schedule->date),
             'schedule_time' => $this->when( $scheduleCount > 1, $this->schedule->time),
-            'product_image' => $images,
+            'product_image' => $prouctCollection['image'],
             'type' => $this->type == 1 ? 'Sell' : 'Donate' 
         ];
 
