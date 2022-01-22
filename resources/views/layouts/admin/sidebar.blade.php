@@ -46,21 +46,29 @@
                     link='admin.product.index'
                     icon="add_shopping_cart"
                 />
+
+                <x-admin.navigation
+                    names='Scrap'
+                    link='admin.scrap.index'
+                    icon="add_to_photos"
+                />
+
                  <x-admin.navigation
                     names='WhyWe'
                     link='admin.why-we.index'
-                    icon="add_shopping_cart"
+                    icon="question_answer"
                 />
 
                  <x-admin.navigation
                     names='Article'
                     link='admin.article.index'
-                    icon="add_shopping_cart"
+                    icon="book"
                 />
-                 <x-admin.navigation
+             
+                <x-admin.navigation
                     names='Video'
                     link='admin.video.index'
-                    icon="video"
+                    icon="ondemand_video"
                 />
 
              

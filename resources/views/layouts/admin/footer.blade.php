@@ -242,7 +242,21 @@
     </div>
   </div>
 <!--/ Theme Customizer -->
+<style>
 
+ .pagination .active {
+    line-height: 2;
+    color: white;
+    padding: 0px 6px;
+    background: green !important;
+    margin-left: 11px;
+}
+
+.pagination li:last-child {
+    line-height: 2.2;
+    margin-left: 11px;
+}
+    </style>
 <script src ="{{ URL::asset('admin-assets/js/plugins.js') }}"/></script>
 <script src ="{{ URL::asset('admin-assets/js/search.js') }}"/></script>
 <script src ="{{ URL::asset('admin-assets/js/custom-script.js') }}"/></script>

@@ -75,7 +75,5 @@ class Scrap extends Model
 	 // }
 
 
-
-
     //
 }

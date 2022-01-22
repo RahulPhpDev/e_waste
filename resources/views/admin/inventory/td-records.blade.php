@@ -7,8 +7,8 @@
 
 
     <td>
-        <button class= "success btn-sm {{ $record->approved ? ' green': ' red' }}">
-         @if( $record->active ) Approved @else Not Approved @endif
+        <button class= "success color-white btn-sm {{ $record->approved ? ' green': ' red' }}">
+         @if( $record->approved ) Approved @else Not Approved @endif
         </button>
     </td>
      <td>

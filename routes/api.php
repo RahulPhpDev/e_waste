@@ -50,4 +50,17 @@ Route::group([
     Route::apiResource('scrap-order', 'ScrapSellingOrderController');
     Route::apiResource('profile', 'ApiUserProfileController');
     Route::get('video','ApiVideoController@index' );
+
+    // buyer-api
+
+    Route::get('buyer/category','ApiCategoryController@index' )->name('buyer.category');
+
+
+    Route::get('buyer/product','Buyer/BuyerProductController@index' )->name('buyer.category');
+ 
+    Route::get('buyer/product','Buyer\BuyerProductController@index' )->name('buyer.category');
+
+
     });
+
+   

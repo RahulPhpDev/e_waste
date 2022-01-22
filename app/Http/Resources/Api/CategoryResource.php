@@ -3,6 +3,8 @@
 namespace App\Http\Resources\Api;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Route;
+
 
 class CategoryResource extends JsonResource
 {
@@ -14,7 +16,7 @@ class CategoryResource extends JsonResource
      */
     public function toArray($request)
     {
-   
+//    dd(Route::currentRouteName());
 
     return  [
             "id" =>  $this->id,

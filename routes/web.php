@@ -105,5 +105,8 @@ Route::group([
    Route::put('video/bilingual/{video?}', 'VideoController@storeBilingual')
             ->name('video.bilingual');
 
+            Route::patch('scrap/{id}/approval', 'ScrapController@approval')->name('scrap.approval');      
+      Route::resource('scrap', 'ScrapController');      
+
 });
 

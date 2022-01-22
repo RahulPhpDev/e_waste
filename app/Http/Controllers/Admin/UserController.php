@@ -21,6 +21,7 @@ class UserController extends Controller
      */
     public function index()
     {
+        // dd(User::all());
       $records = User::paginate( PaginationEnum::Show10Records );
       return view('admin.user.index', compact('records') );
     }

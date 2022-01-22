@@ -30,7 +30,9 @@
                                   @each('admin.user.td-records', $records, 'record', 'partials.table.empty')
                             </tbody>
                         </table>
-
+                     <div class= "col s6 m6 right">                       
+                        {{ $records->links() }}
+                                        </div>
                     </div>
                 </div>
             </div>
