@@ -16,7 +16,7 @@ class BuyerProductController extends Controller
 
        return collect([
            'category' => $catgory,
-         'product' =>  Product::get(),
+         'product' =>  Product::with('image')->get(),
          'sucess' => true
        ]);
        
