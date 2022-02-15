@@ -9,7 +9,9 @@ trait TranslatorTrait
 
 	public function translate( )
 	{
-
+		if ( config('app.env')  === 'local') {
+			return $this;
+		}	
 	  $translate = new GoogleTranslate();
 
 	  $hindiArr = [];
