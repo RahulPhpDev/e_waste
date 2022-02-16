@@ -104,8 +104,7 @@ class CategoryController extends Controller
             'name' => 'required|max:255',
              'description' => 'required|max:200',
         ]);
-
-     $category->update( $valid )->translate();
+        tap($category)->update( $valid )->translate();
     return redirect()->route('admin.category.index')->with('success',FlashMessagesEnum::CreatedMsg);;
     }
 
