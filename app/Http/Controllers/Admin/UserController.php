@@ -79,7 +79,7 @@ class UserController extends Controller
             'record' => $user,
             'roles' => $roles,
             'zones' => $zones,
-            'userZone' => $user->zone->first()->id
+            'userZone' => optional($user->zone->first())->id
         ]);
     }
 
@@ -95,7 +95,9 @@ class UserController extends Controller
         $user->update(
             $request->updateUserDetails()
         );
-        $user->zone()->sync($request->zone_id);
+        if ( $request->zone_id ) {
+            $user->zone()->sync($request->zone_id);
+        }
       return redirect()->route('admin.user.index')->with('success',FlashMessagesEnum::UpdateMsg);
 
     }
