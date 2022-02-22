@@ -50,6 +50,7 @@ Route::group([
     Route::apiResource('scrap-order', 'ScrapSellingOrderController');
     Route::apiResource('profile', 'ApiUserProfileController');
     Route::get('video','ApiVideoController@index' );
+    Route::apiResource('event', 'ApiEventController')->only('index', 'show');
 
     // buyer-api
 
@@ -60,6 +61,7 @@ Route::group([
  
     Route::get('buyer/product','Buyer\BuyerProductController@index' )->name('buyer.category');
 
+   
 
     });
 

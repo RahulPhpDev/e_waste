@@ -149,7 +149,7 @@ class CategoryController extends Controller
                     ]);
 
                 $path =  $request->file('image')
-                                    ->storeAs('public/category/',
+                                    ->storeAs('public/category',
                                         $category->id.'.'.$request->image->extension()
                                     );
                 if ( is_null($category->image  ) )

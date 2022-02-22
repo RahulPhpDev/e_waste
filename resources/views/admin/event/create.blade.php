@@ -2,7 +2,7 @@
     <div class="col s12 m12 l12">
         <div id="responsive-table" class="card card card-default scrollspy">
             <div class="card-content">
-                <h4 class="card-title camel-case">  Add Event </h4>
+                <h4 class="card-title camel-case">  Add event </h4>
                 <div class="row">
                     <div class="col s12">
 
@@ -31,42 +31,26 @@
 
                         <div class="input-field col m12 s12">
 
-
+                            Description
                               <textarea id = "description" name = "description" id="message5" class="materialize-textarea"></textarea>
 
                             @error('description')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
-
-
-
                     </div>
 
                     <div class = "row">
-
-                    <div class="col m6 s12 file-field input-field">
-                        <div class="btn float-right">
-                            <span>Banner</span>
-                            <input type="file" name="banner">
-                        </div>
-                        <div class="file-path-wrapper">
-                            <input class="file-path validate" type="text">
+                        <div class="input-field col m12 s12">
+                        <label for="icon_prefix2" class="active"> Schedule </label>
+                            <input type="text" class="datepicker" name ="schedule_at">
+                            @error('datepicker')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
 
-                       <div class="col m6 s12 file-field input-field">
-                        <div class="btn float-right">
-                            <span>Video</span>
-                            <input type="file" name="video">
-                        </div>
-                        <div class="file-path-wrapper">
-                            <input class="file-path validate" type="text">
-                        </div>
-                    </div>
-
-
-                    </div>
+                  
 
                          <div class = "row">
                             <div class="input-field col m4 s12">
@@ -86,4 +70,13 @@
             </div>
         </div>
     </div>
+    @push('scripts')
+    <script>
+    $('.datepicker').pickadate({
+        format: 'yyyy-mm-dd',
+        selectMonths: true, // Enable Month Selection
+        selectYears: 1 // Creates a dropdown of 10 years to control year
+    });
+        </script>
+    @endpush
 </x-admin.layout>

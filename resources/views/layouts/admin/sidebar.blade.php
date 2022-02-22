@@ -71,6 +71,13 @@
                     icon="ondemand_video"
                 />
 
+
+                <x-admin.navigation
+                    names='Event'
+                    link='admin.event.index'
+                    icon="event"
+                />
+
              
 
     </ul>

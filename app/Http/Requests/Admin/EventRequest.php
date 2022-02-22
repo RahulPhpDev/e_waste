@@ -26,9 +26,7 @@ class EventRequest extends FormRequest
     {
            return [
               'title' => 'required|max:100',
-            'description' => 'required|min:10',
-            'banner' => 'mimes:jpeg,png|max:5014',
-            'video' => 'mimes:mp4,mov|max:10014',
+            'description' => 'required|min:2'
 
         ];
     }
@@ -47,7 +45,7 @@ class EventRequest extends FormRequest
 
     public function createEvent()
     {
-        return $this->only('title', 'description', 'slug', 'created_by');
+        return $this->only('title', 'description', 'slug', 'created_by', 'schedule_at');
     }
 
      /**

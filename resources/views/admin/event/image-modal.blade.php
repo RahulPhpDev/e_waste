@@ -10,7 +10,7 @@
         <div class="row center">
 
             <h4>  @if ($record->image && $record->image->url) Update @else Add @endIf Image </h4>
-            <form method="post" enctype="multipart/form-data" action={{route('admin.event.image.store', $record->id)}}>
+            <form method="post" enctype="multipart/form-data" action={{route('admin.article.image.store', $record->id)}}>
                     @csrf
 
                     <div class = "row">
@@ -42,7 +42,7 @@
 
         <div class="modal-footer">
                @if ($record->image && $record->image->url)
-             <form class="display-inline" method="POST" action={{route('admin.event.destroy.image', [$record->id]  )}}>
+             <form class="display-inline" method="POST" action={{route('admin.article.destroy.image', [$record->id]  )}}>
                    @csrf
                    @method('delete')
                    <button type="submit" class="waves-effect waves-light btn gradient-45deg-light-warning-cyan z-depth-4 btn-small-custom">

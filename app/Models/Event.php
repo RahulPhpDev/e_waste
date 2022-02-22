@@ -8,7 +8,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Event extends Model
 {
 	use SoftDeletes;
-
+	//Casts of the model dates
+// 	protected $casts = [
+// 		'schedule_at'  => 'datetime:Y-m-d\TH:i'
+//   ];
+	
 	 protected $guarded = [];
 
 

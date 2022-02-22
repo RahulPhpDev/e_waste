@@ -270,7 +270,7 @@
  <script src="https://cdn.ckeditor.com/4.16.1/standard/ckeditor.js"></script>
 
 <script>
-    CKEDITOR.replace('description' );
+    CKEDITOR.replace('description',{  enterMode : CKEDITOR.ENTER_BR,shiftEnterMode : CKEDITOR.ENTER_P} );
 
 //   config.font_names = 'Arial;Times New Roman;Verdana;' +  CKEDITOR.config.font_names;
 

@@ -11,7 +11,7 @@
         </div>
 
           <div class="row center">
-          	 <form method="post" enctype="multipart/form-data" action={{route('admin.event.video.store', $record->id)}}>
+          	 <form method="post" enctype="multipart/form-data" action={{route('admin.article.video.store', $record->id)}}>
                     @csrf
 
                     <div class = "row">
@@ -42,7 +42,7 @@
 
         <div class="modal-footer">
   @if($record->video)
-                  <form class="display-inline" method="POST" action={{route('admin.event.destroy.video', [$record->id]  )}}>
+                  <form class="display-inline" method="POST" action={{route('admin.article.destroy.video', [$record->id]  )}}>
                    @csrf
                    @method('delete')
                    <button type="submit" class="waves-effect waves-light btn gradient-45deg-light-warning-cyan z-depth-4 btn-small-custom">

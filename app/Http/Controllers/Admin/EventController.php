@@ -41,37 +41,10 @@ class EventController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(EventRequest $request)
+    // public function store(Request $request)
     {
     $event = Event::create(  $request->createEvent() );
-    if ( $request->hasFile('video') &&
-            $request->file('video')->isValid()
-        )
-        {
-            $Vpath =  $request->file('video')
-                                ->storeAs('public/event/video',
-                                    $event->id.'.'.$request->video->extension()
-                                );
-
-                $event->video = $Vpath;
-                $event->save();
-
-        }
-
-     if ( $request->hasFile('banner') &&
-            $request->file('banner')->isValid()
-        )
-        {
-            $path =  $request->file('banner')
-                                ->storeAs('public/event/banner',
-                                    $event->id.'.'.$request->banner->extension()
-                                );
-          \Log::info($path);
-
-                $event->image()->create([
-                    'url' => $path,
-                ]);
-
-        }
+//    dd( $request->all());
     return redirect()->route('admin.event.index')->with('success',FlashMessagesEnum::CreatedMsg);
     }
 
