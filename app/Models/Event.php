@@ -20,5 +20,12 @@ class Event extends Model
 	{
 		return $this->morphOne(Image::class, 'imageable');
 	}
+
+	public function setScheduleAtAttribute($value) 
+	{
+		
+		$this->attributes['schedule_at'] = $value->format('Y-m-d');;
+	}
+
     //
 }
