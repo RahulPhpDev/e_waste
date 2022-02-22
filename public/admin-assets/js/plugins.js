@@ -110,7 +110,7 @@ $(function () {
    // initialize datepicker
    $('.datepicker').datepicker({
       autoClose: true,
-      format: 'yyyy-mm-dd',
+      format: 'dd/mm/yyyy',
       container: 'body',
       onDraw: function () {
          // materialize select dropdown not proper working on mobile and tablets so we make it browser default select

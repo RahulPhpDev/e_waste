@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -9,6 +10,10 @@ class Event extends Model
 {
 	use SoftDeletes;
 	//Casts of the model dates
+	// protected $casts = [
+	// 	'schedule_at' => 'datetime:Y-m-d',
+	// ];
+	protected $dates = ['schedule_at'];
 // 	protected $casts = [
 // 		'schedule_at'  => 'datetime:Y-m-d\TH:i'
 //   ];
@@ -23,8 +28,7 @@ class Event extends Model
 
 	public function setScheduleAtAttribute($value) 
 	{
-		
-		$this->attributes['schedule_at'] = $value->format('Y-m-d');;
+		$this->attributes['schedule_at'] =Carbon::createFromFormat('m/d/Y',$value)->format('Y-m-d');;
 	}
 
     //
