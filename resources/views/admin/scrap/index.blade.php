@@ -5,10 +5,13 @@
             <form mehtod = "get" > 
                 <div class="row" style = "display:inline">
                     <div class="col s6" >
-                        <label> Select Status</label>    
+                        <label> Select Status</label>   
+                       
                         <select name ="status">
-                                <option value = "approved"> Approved </option>
-                            <option value = "un-approved"> UnApproved </option>
+                                <option value = ""> All </option>
+                                <option @if ($_REQUEST['status'] == 'approved') selected @endif value = "approved"> Approved </option>
+                            <option @if ($_REQUEST['status'] == 'un-approved') selected @endif value = "un-approved"> UnApproved </option>
+                            <option @if ($_REQUEST['status'] == 'pending') selected @endif value = "pending"> Pending </option>
                         </select>
                     </div>
 

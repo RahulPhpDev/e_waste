@@ -18,17 +18,28 @@ class ScrapController extends Controller
     public function index(Request $request)
     {
         $status = [
+            'all' => 3,
             'approved' => 1,
-            'un-approved' => 2
+            'un-approved' => 2,
+            'pending' => 0
         ];
 
        $statusVal = $request->get('status') && 
         array_key_exists(
            $request->get('status') ,$status) 
            ?  $status[$request->get('status')] 
-           : 0;
-
-       $records = Scrap::with('user','scrapproducts')->where('status', $statusVal)->paginate( PaginationEnum::Show10Records );
+           : null;
+        
+           $records = Scrap::query()
+           ->with('user','scrapproducts')
+           ->when(
+                 $statusVal, function ($query, $statusVal
+                 ) { 
+                 return $query->where('status', $statusVal);
+                }
+        )
+        ->paginate( PaginationEnum::Show10Records );
+    //    $records = Scrap::with('user','scrapproducts')->where('status', $statusVal)->paginate( PaginationEnum::Show10Records );
 
     //    dd( $records );
        return view('admin/scrap/index' , compact('records'));
