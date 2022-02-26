@@ -48,7 +48,7 @@
                 />
 
                 <x-admin.navigation
-                    names='Scrap'
+                    names='Sell Scrap History'
                     link='admin.scrap.index'
                     icon="add_to_photos"
                 />

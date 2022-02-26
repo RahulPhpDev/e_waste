@@ -24,25 +24,21 @@ class ScrapController extends Controller
             'pending' => 0
         ];
 
-       $statusVal = $request->get('status') && 
-        array_key_exists(
-           $request->get('status') ,$status) 
+       $statusVal = !is_null($request->get('status')) && 
+                array_key_exists( $request->get('status') ,$status ) 
            ?  $status[$request->get('status')] 
            : null;
-        
            $records = Scrap::query()
-           ->with('user','scrapproducts')
-           ->when(
-                 $statusVal, function ($query, $statusVal
-                 ) { 
-                 return $query->where('status', $statusVal);
-                }
-        )
-        ->paginate( PaginationEnum::Show10Records );
-    //    $records = Scrap::with('user','scrapproducts')->where('status', $statusVal)->paginate( PaginationEnum::Show10Records );
+                ->with('user','scrapproducts')
+                ->when(
+                       isset($statusVal), function ($query) use ($statusVal) { 
+                        return $query->where('status', $statusVal);
+                        }
+                )
+                ->paginate( PaginationEnum::Show10Records );
 
-    //    dd( $records );
-       return view('admin/scrap/index' , compact('records'));
+ 
+       return view('admin/scrap/index' , compact('records'), ['status' => $request->get('status')]);
     }
 
     /**
@@ -74,7 +70,8 @@ class ScrapController extends Controller
      */
     public function show($id)
     {
-        //
+       $record = Scrap::find($id);
+        return view('admin/scrap/detail', compact('record') );
     }
 
     /**
@@ -116,7 +113,7 @@ class ScrapController extends Controller
     {
        Scrap::find($id)->update(
            [
-               'status' => $request->get('status') === 'on' ? 1 : 0
+               'status' => $request->get('status')
            ]
            );
            return redirect()->route('admin.scrap.index');

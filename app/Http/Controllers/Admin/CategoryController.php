@@ -8,6 +8,7 @@ use App\Enums\PaginationEnum;
 use App\Enums\FlashMessagesEnum;
 use App\Models\Category;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
@@ -147,11 +148,16 @@ class CategoryController extends Controller
                  $validated = $request->validate([
                         'image' => 'mimes:jpeg,png,jpg,svg|max:5014',
                     ]);
-
+                if ( $category->image && $category->image->url )    {
+                    if(Storage::disk('public')->exists($category->image->url)){
+                        Storage::disk('public')->delete($category->image->url);
+                      }
+                }
                 $path =  $request->file('image')
                                     ->storeAs('public/category',
                                         $category->id.'.'.$request->image->extension()
                                     );
+
                 if ( is_null($category->image  ) )
                 {
                  $category->image()->create([

@@ -4,14 +4,15 @@
             <div class="card-content">
             <form mehtod = "get" > 
                 <div class="row" style = "display:inline">
+             
                     <div class="col s6" >
                         <label> Select Status</label>   
                        
                         <select name ="status">
                                 <option value = ""> All </option>
-                                <option @if ($_REQUEST['status'] == 'approved') selected @endif value = "approved"> Approved </option>
-                            <option @if ($_REQUEST['status'] == 'un-approved') selected @endif value = "un-approved"> UnApproved </option>
-                            <option @if ($_REQUEST['status'] == 'pending') selected @endif value = "pending"> Pending </option>
+                                <option @if ($status == 'approved') selected @endif value = "approved"> Approved </option>
+                            <option @if ($status == 'un-approved') selected @endif value = "un-approved"> UnApproved </option>
+                            <option @if ($status == 'pending') selected @endif value = "pending"> Pending </option>
                         </select>
                     </div>
 
@@ -31,7 +32,7 @@
                             @component('partials.th',
                                         [
                                             'tableHeads' =>
-                                                ['ID', 'User','Category', 'Phone', 'Status','Created At','Change Status','Comment']
+                                                ['ID', 'User','Category', 'Phone', 'Status','Created At','Change Status', 'Details']
                                         ])
                             @endcomponent
 

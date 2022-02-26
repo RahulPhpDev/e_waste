@@ -10,6 +10,7 @@ use Illuminate\Pagination\Paginator;
 //use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Blade;
 use Validator;
 
 class AppServiceProvider extends ServiceProvider
@@ -71,7 +72,10 @@ class AppServiceProvider extends ServiceProvider
             }
              
         });
-    
+
+   
+        
 
     }
+
 }

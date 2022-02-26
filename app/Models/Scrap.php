@@ -69,6 +69,20 @@ class Scrap extends Model
 	 	return $this->hasMany(ScrapProduct::class);
 	 }
 
+	 public function getScrapStatusAttribute() {
+		// dd($this);
+		 switch($this->status) {
+			case 0:
+				return 'Pending';
+			case 1:
+				return 'Approved';
+			case 2:
+				return 'Discard';
+			default:
+			return 'not donf';	
+		}
+	 }
+
 	 // public function products()
 	 // {
 	 // 	return $this->belongsToMany(Product::class, 'scrap_product')->withPivot('name', 'quantity', 'price');

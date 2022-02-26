@@ -16,7 +16,8 @@ class ApiEventController extends Controller
      */
     public function index()
     {
-        $record = Event::all();
+        $record = [];
+        // Event::all();
        return response()->json([
         'data' => $record,
         'sucess' => true

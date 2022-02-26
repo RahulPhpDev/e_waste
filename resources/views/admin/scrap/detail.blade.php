@@ -1,44 +1,52 @@
+
 <x-admin.layout>
-  <div class="row">
-            <div class="col-lg-6 col-md-12">
-              <div class="card">
+    <div class="col s12 m12 l12">
+        <div id="responsive-table" class="card card card-default scrollspy">
+            <div class="card-content">
+            
+                <div class="row" style = "padding: 10px; line-height:3">
+                    
 
+                <div class="tab-content">
 
-                <div class="card-body">
-                  <div class="tab-content">
-                    <div class="tab-pane active show" id="profile">
-                        <h6> Name: <span> {{$product->name}}</span>  </h6>
-                    </div>
+<div class="tab-pane active show" id="profile">
+      <h6> ID: <span> {{$record->id}}</span>  </h6>
+  </div>
 
-                     <div class="tab-pane active show" id="profile">
-                        <h6> Name: <span> {{$product->name}}</span>  </h6>
-                    </div>
+  <div class="tab-pane active show" id="profile">
+      <h6> User Name: <span> {{$record->user->name}}</span>  </h6>
+  </div>
 
-                     <div class="tab-pane active show" id="profile">
-                        <h6> Name: <span> {{$product->name}}</span>  </h6>
-                    </div>
+<div class="tab-pane active show" id="profile">
+      <h6>  Phone: <span> {{$record->phone}}</span>  </h6>
+  </div>
 
-                     <div class="tab-pane active show" id="profile">
-                        <h6> Name: <span> {{$product->name}}</span>  </h6>
-                    </div>
+  <div class="tab-pane active show" id="profile">
+      <h6> Zone: <span> {{$record->zone->name}}</span>  </h6>
+  </div>
 
-                     <div class="tab-pane active show" id="profile">
-                        <h6> Name: <span> {{$product->name}}</span>  </h6>
-                    </div>
+   <div class="tab-pane active show" id="profile">
+      <h6> Schedule Date: <span> {{$record->schedule->date}}</span>  </h6>
+  </div>
 
-                     <div class="tab-pane active show" id="profile">
-                        <h6> Name: <span> {{$product->name}}</span>  </h6>
-                    </div>
+  <div class="tab-pane active show" id="profile">
+      <h6> Schedule Time: <span> {{$record->schedule->time}}</span>  </h6>
+  </div>
 
-                     <div class="tab-pane active show" id="profile">
-                        <h6> Name: <span> {{$product->name}}</span>  </h6>
-                    </div>
+   <div class="tab-pane active show" id="profile">
+      <h6> Create At: <span> {{$record->created_at}}</span>  </h6>
+  </div>
 
-                  </div>
+  
+
+</div>
+
                 </div>
-              </div>
             </div>
 
-          </div>
+        </div>
+    </div>
 
-        </x-admin.layout>
+</x-admin.layout>
+
+

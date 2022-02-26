@@ -8205,6 +8205,16 @@ span.badge.pill
     text-transform: capitalize;
 }
 
+.btn-small
+{
+    padding: 0px 5px;
+}
+.flex {
+    display: flex;
+}
+.material-icons {
+    cursor: pointer;
+}
 .btn-block
 {
     display: block;

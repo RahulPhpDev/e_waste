@@ -5,43 +5,34 @@
     <td> {{$record->phone}} </td>
   
     <td> 
-    @if($record->status === 1)
-    Approved
-    @elseif($record->status === 2)
-    Decline
-
-    @else
-    Pending
-
-    @endif
-    
-    
+  
+    {{  $record->scrap_status }}
 
     </td>
     <td> {{ $record->created_at->format('d-M-Y') }} </td>
     <td>
-    <form class="display-inline" method="POST" action={{route('admin.scrap.approval', [$record->id]  )}}>
-           @csrf
-           @method('patch')
-           <label>
-            <input name ="status" type="checkbox"  />
-                <span></span>
-         </label>
-           <!-- <button type="submit" class="waves-effect waves-light btn gradient-45deg-light-warning-cyan z-depth-4">
-               Change approve status
-           </button> -->
-           <button type="submit" class="btn-small">
-               Approved
-           </button> 
+    @if($record->status === 0)
+        <form class="display-inline" method="POST" action={{route('admin.scrap.approval', [$record->id]  )}}>
+            @csrf
+            @method('patch')
+                <select name ="status">
+                    <option> Select </option>
+                    <option value = "1"> Approve </option>
+                    <option value = "2"> Discard </option>
+                </select>
+
+            <button type="submit" class="btn-small">
+                Update
+            </button> 
        </form>
+       @endif
     </td>
 
 
 
     <td>
-        Make Comment
-
-        
-
+        <a   class="modal-trigger waves-effect  waves-light btn gradient-45deg-light-blue-cyan z-depth-3  mr-3 btn-small" href="{{route('admin.scrap.show', [$record->id] )}}">
+            Details
+        </a>
     </td>
 </tr>

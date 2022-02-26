@@ -11,21 +11,24 @@
     <div  role="document">
         <div >
 
+            @if($record->image && $record->image->url)
+             <img class="img" src = "{{asset('storage/'.$record->image->url)}}" height="200" width="300" />
+            @endIf
             <div >
+
+           
 
                 <form method="post" enctype="multipart/form-data" action={{route('admin.category.update-image', $record->id) }} >
                     @csrf
                     @method('PUT')
                     <div class="row">
                         <div class="input-field col m6 s6">
-                             <label for="icon_prefix2" class="active"> Image </label>
                             <input id="icon_prefix2" type="file"  value="{{ $record->name }}"  class = 'validate' name = 'image'>
-
                            
                         </div>
 
 
-                        <
+                        
                         <div class="input-field col m4 s12">
                             <div class="input-field col s12">
                                 <button  class="btn cyan waves-effect waves-light" type="submit"
