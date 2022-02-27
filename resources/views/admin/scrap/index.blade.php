@@ -5,20 +5,18 @@
             <form mehtod = "get" > 
                 <div class="row" style = "display:inline">
              
-                    <div class="col s6" >
+                    <div class="col s4" >
                         <label> Select Status</label>   
                        
                         <select name ="status">
                                 <option value = ""> All </option>
                                 <option @if ($status == 'approved') selected @endif value = "approved"> Approved </option>
-                            <option @if ($status == 'un-approved') selected @endif value = "un-approved"> UnApproved </option>
+                            <option @if ($status == 'un-approved') selected @endif value = "un-approved"> Discard </option>
                             <option @if ($status == 'pending') selected @endif value = "pending"> Pending </option>
                         </select>
-                    </div>
-
-                    <div class="col s6" >
-                    <button type ="submit" class="modal-trigger
+                        <button type ="submit" class="modal-trigger
                         waves-effect pull-right waves-light btn gradient-45deg-light-blue-cyan z-depth-3 mb-2"> Fliter </button>
+
                     </div>
 
 

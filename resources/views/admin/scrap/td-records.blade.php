@@ -11,7 +11,7 @@
     </td>
     <td> {{ $record->created_at->format('d-M-Y') }} </td>
     <td>
-    @if($record->status === 0)
+    @if($record->status == 0)
         <form class="display-inline" method="POST" action={{route('admin.scrap.approval', [$record->id]  )}}>
             @csrf
             @method('patch')
