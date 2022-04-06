@@ -90,7 +90,7 @@
                                     <label
                                         for="zone_id"
                                         class="active">
-                                        Select Zone
+                                        Select Collection Center
                                     </label>
                                     <select
                                         name="zone_id"

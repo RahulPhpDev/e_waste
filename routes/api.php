@@ -61,6 +61,7 @@ Route::group([
  
     Route::get('buyer/product','Buyer\BuyerProductController@index' )->name('buyer.category');
 
+    Route::apiResource('notification', 'ApiNotificationController');
    
 
     });

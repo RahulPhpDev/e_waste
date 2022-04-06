@@ -1,9 +1,17 @@
 
 <x-admin.layout>
+
     <div class="col s12 m12 l12">
         <div id="responsive-table" class="card card card-default scrollspy">
             <div class="card-content">
-            
+                   <a
+                           class="modal-trigger
+                       waves-effect waves-light btn gradient-45deg-light-blue-cyan z-depth-3 mb-2"
+                           href="{{route('admin.scrap.index')}}"
+                           >
+
+                           Back
+                       </a>
                 <div class="row" style = "padding: 10px; line-height:3">
                     
 
@@ -38,6 +46,9 @@
   </div>
 
   
+  <div class="tab-pane active show" id="profile">
+      <h6> Description: <span> {{ $record->scrapproducts->pluck('description')->implode(',') }}</span>  </h6>
+  </div>
 
 </div>
 

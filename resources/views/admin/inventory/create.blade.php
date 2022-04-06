@@ -67,7 +67,7 @@
 
                         <div class="col m6 s12 file-field input-field">
                         <div class="btn float-right">
-                            <span>File</span>
+                            <span>Upload Image</span>
                             <input type="file" name="product_image">
                         </div>
                         <div class="file-path-wrapper">

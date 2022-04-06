@@ -34,7 +34,7 @@ class UserController extends Controller
     public function create()
     {
        $roles = Role::pluck( 'name', 'id' )->prepend('Select Role', '');
-       $zones = Zone::pluck('name', 'id')->prepend('Select Zone', '');
+       $zones = Zone::pluck('name', 'id')->prepend('Select Collection Center', '');
        return view('admin.user.create', compact('roles', 'zones'));
     }
 
@@ -73,8 +73,8 @@ class UserController extends Controller
      */
     public function edit( User $user )
     {
-       $roles = Role::pluck( 'name', 'id' )->prepend('Select Zone', '');
-       $zones = Zone::pluck('name', 'id')->prepend('Select Zone', '');
+       $roles = Role::pluck( 'name', 'id' )->prepend('Select Role', '');
+       $zones = Zone::pluck('name', 'id')->prepend('Select Collection Center', '');
         return view('admin/user/edit', [
             'record' => $user,
             'roles' => $roles,

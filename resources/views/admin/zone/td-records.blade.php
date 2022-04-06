@@ -1,10 +1,10 @@
-<tr>
+<tr class = "record_tr" id ="recrod_{{ $record->id }}" data-district = {{$record->district->name }}  >
     <td> {{$record->id}} </td>
     <td> {{$record->name}} </td>
     <td> {{$record->zip_code}} </td>
     <td> {{$record->lattitude}} </td>
     <td> {{$record->longitute}} </td>
-    <td> {{$record->district->name }} </td>
+    <td class="district_column" data-type = "district"> {{$record->district->name }} </td>
     <td> {{$record->landmark }} </td>
 
 

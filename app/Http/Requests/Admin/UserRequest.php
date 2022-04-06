@@ -25,8 +25,9 @@ class UserRequest extends FormRequest
      */
     public function rules()
     {
+        // 'unique:users,email_address,'.$user->id
         return [
-            'email' => 'required','unique:users', 'email',
+        'email' => ['required','unique:users,email'],
             'role_id' => 'required', 'exists:App\Models\Role,id',
             'name' => 'required',
             'phone' => 'required',

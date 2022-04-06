@@ -12046,3 +12046,10 @@ tr.group:hover
     top: 40%;
     right: -2px;
 }
+textarea {
+    display: block !important;
+}
+
+.font-bold {
+    font-weight: 600;
+}

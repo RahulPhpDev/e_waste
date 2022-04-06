@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\User;
+use Illuminate\Support\Str;
 
 class Scrap extends Model
 {
@@ -26,7 +27,15 @@ class Scrap extends Model
 
 	 protected $with = ['userAddress', 'category','schedule','zone'];
 
+	protected static function boot()
+	{
+		parent::boot();
+		self::created( function ($model) {
+			$model->scrap_num = 'EWMU-'.Str::of(now()->timestamp)->substr(-3).$model->id;
 
+			$model->save();
+		});
+	}
 	 public function user()
 	 {
 	 	return $this->belongsTo(User::class, 'user_id');

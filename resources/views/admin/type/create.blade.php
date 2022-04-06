@@ -25,8 +25,7 @@
                             @enderror
                         </div>
 
-
-                        <div class="input-field col m6 s6">
+                        <div class="input-field col m12 s12 textarea-div">
 
 
                                <label for="description" class="active"> Description</label>

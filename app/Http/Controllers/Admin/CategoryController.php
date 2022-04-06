@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Enums\PaginationEnum;
 use App\Enums\FlashMessagesEnum;
 use App\Models\Category;
+use App\Models\Image;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 
@@ -57,7 +58,7 @@ class CategoryController extends Controller
 
             $path =  $request->file('category_image')
                                 ->storeAs('public/category',
-                                    $category->id.'.'.$request->category_image->extension()
+                                     now()->timestamp.'_'.$category->id.'.'.$request->category_image->extension()
                                 );
 
                 $category->image()->create([
@@ -155,14 +156,23 @@ class CategoryController extends Controller
                 }
                 $path =  $request->file('image')
                                     ->storeAs('public/category',
-                                        $category->id.'.'.$request->image->extension()
+                                       now()->timestamp.'_'.$category->id.'.'.$request->image->extension()
                                     );
 
-                if ( is_null($category->image  ) )
+                if ( $path )
                 {
-                 $category->image()->create([
-                        'url' => $path,
-                    ]);
+                //   dump('yaa');
+                //   $category->image()->create([
+                //     'url' => $path,
+                // ]);
+                    $imageObj = new Image();
+                    $image = $imageObj->find($category->image->id);
+                     $image->url= $path;
+                      $image->save();
+                 // $category->image()->create([
+                 //        'url' => $path.'2',
+                 //    ]);
+
              }
          } else {
             return redirect()->route('admin.category.index')->with('error','Not able to upload');

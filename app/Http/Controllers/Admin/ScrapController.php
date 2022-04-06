@@ -7,6 +7,8 @@ use App\Enums\PaginationEnum;
 use App\Http\Controllers\Controller;
 use App\Models\Scrap;
 use Illuminate\Http\Request;
+use App\Notifications\ScrapStatusUpdateNotification;
+
 
 class ScrapController extends Controller
 {
@@ -17,6 +19,7 @@ class ScrapController extends Controller
      */
     public function index(Request $request)
     {
+        // update in notification too
         $status = [
             'all' => 3,
             'approved' => 1,
@@ -35,6 +38,7 @@ class ScrapController extends Controller
                         return $query->where('status', $statusVal);
                         }
                 )
+                ->orderByDesc('id')
                 ->paginate( PaginationEnum::Show10Records );
 
  
@@ -70,7 +74,7 @@ class ScrapController extends Controller
      */
     public function show($id)
     {
-       $record = Scrap::find($id);
+       $record = Scrap::with('scrapproducts')->find($id);
         return view('admin/scrap/detail', compact('record') );
     }
 
@@ -111,11 +115,14 @@ class ScrapController extends Controller
 
     public function approval(Request $request,$id)
     {
-       Scrap::find($id)->update(
+       $scrap = tap(Scrap::find($id))->update(
            [
                'status' => $request->get('status')
            ]
            );
+       $user = \App\User::find($scrap->user->id);
+$user->notify(new ScrapStatusUpdateNotification($scrap) );
+       // dd( $scrap);
            return redirect()->route('admin.scrap.index');
     }
 }

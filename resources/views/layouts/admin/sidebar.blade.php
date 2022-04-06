@@ -3,7 +3,7 @@
 <aside class="sidenav-main nav-expanded nav-lock nav-collapsible sidenav-light sidenav-active-square">
     <div class="brand-sidebar">
         <h1 class="logo-wrapper"><a class="brand-logo darken-1" href="/">
-                <span class="logo-text hide-on-med-and-down">{{ config('app.name', 'Laravel') }}</span></a><a class="navbar-toggler" href="#"><i class="material-icons">radio_button_checked</i></a></h1>
+                <span class="logo-text hide-on-med-and-down">{{ config('app.name', 'Laravel') }}</span></a></h1>
     </div>
 
 
@@ -31,13 +31,13 @@
                     icon="category"
                 />
                   <x-admin.navigation
-                    names='Type'
+                    names='Product Type'
                     link='admin.type.index'
                     icon="line_style"
                 />
 
                   <x-admin.navigation
-                    names='Zone'
+                    names='Collection Store'
                     link='admin.zone.index'
                     icon="store"
                 />

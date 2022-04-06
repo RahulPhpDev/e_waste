@@ -2,29 +2,76 @@
     <div class="navbar navbar-fixed">
         <nav class="navbar-main navbar-color nav-collapsible sideNav-lock navbar-dark gradient-45deg-indigo-purple no-shadow">
             <div class="nav-wrapper">
-             
+             <?php
+             $user = \Auth::user();
+
+         ?>
+         <input name="_token" value = "{{csrf_token()}}" type = "hidden" />
                 <ul class="navbar-list right">
-                    <li class="dropdown-language"><a class="waves-effect waves-block waves-light translation-button" href="#" data-target="translation-dropdown"><span class="flag-icon flag-icon-gb"></span></a></li>
-                    <li class="hide-on-med-and-down"><a class="waves-effect waves-block waves-light toggle-fullscreen" href="javascript:void(0);"><i class="material-icons">settings_overscan</i></a></li>
-                    <li class="hide-on-large-only search-input-wrapper"><a class="waves-effect waves-block waves-light search-button" href="javascript:void(0);"><i class="material-icons">search</i></a></li>
-                    <li><a class="waves-effect waves-block waves-light notification-button" href="javascript:void(0);" data-target="notifications-dropdown"><i class="material-icons">notifications_none<small class="notification-badge">5</small></i></a></li>
-                    <li><a class="waves-effect waves-block waves-light profile-button" href="javascript:void(0);" data-target="profile-dropdown"><span class="avatar-status avatar-online"><i></i></span></a></li>
+                    <li class="dropdown-language">
+                        <a class="waves-effect waves-block waves-light translation-button" href="#" data-target="translation-dropdown"><span class="flag-icon flag-icon-gb"></span></a>
+                    </li>
+                   {{--  <li class="hide-on-med-and-down">
+                        <a class="waves-effect waves-block waves-light toggle-fullscreen" href="javascript:void(0);"><i class="material-icons">settings_overscan</i></a>
+                    </li> --}}
+                   {{--  <li class="hide-on-large-only search-input-wrapper">
+                        <a class="waves-effect waves-block waves-light search-button" href="javascript:void(0);"><i class="material-icons">search</i></a>
+                    </li> --}}
+                    
+                    @if ($user && $user->unreadNotifications)
+                    <li>
+                        <a id = "notification-count" onclick = "readNotification()" class="waves-effect waves-block waves-light notification-button" href="javascript:void(0);" data-target="notifications-dropdown"><i class="material-icons">notifications_none
+                            <small class="notification-badge">
+                            {{$user->unreadNotifications->count()}}
+                        </small>
+                    </i></a></li>
+                        @endif
+                    <li>
+                        <a class="waves-effect waves-block waves-light profile-button" href="javascript:void(0);" data-target="profile-dropdown"><span class="avatar-status avatar-online"><i></i></span></a></li>
 
                 </ul>
                 <!-- translation-button-->
                 <ul class="dropdown-content" id="translation-dropdown">
-                    <li class="dropdown-item"><a class="grey-text text-darken-1" href="#!" data-language="en"><i class="flag-icon flag-icon-gb"></i> English</a></li>
-                    <li class="dropdown-item"><a class="grey-text text-darken-1" href="#!" data-language="fr"><i class="flag-icon flag-icon-fr"></i> French</a></li>
-                    <li class="dropdown-item"><a class="grey-text text-darken-1" href="#!" data-language="pt"><i class="flag-icon flag-icon-pt"></i> Portuguese</a></li>
-                    <li class="dropdown-item"><a class="grey-text text-darken-1" href="#!" data-language="de"><i class="flag-icon flag-icon-de"></i> German</a></li>
+                    <li class="dropdown-item"><a class="grey-text text-darken-1" href="#!" data-language="en"><i class="flag-icon flag-icon-gb"></i> </a></li>
                 </ul>
                 <!-- notifications-dropdown-->
                 <ul class="dropdown-content" id="notifications-dropdown">
-                    <li>
-                        <h6>NOTIFICATIONS<span class="new badge">5</span></h6>
+                    <li >
+                        <h6>NOTIFICATIONS<span  class="new badge"> {{$user->unreadNotifications->count()}}</span></h6>
                     </li>
                     <li class="divider"></li>
-                    <li><a class="black-text" href="#!"><span class="material-icons icon-bg-circle cyan small">add_shopping_cart</span> A new order has been placed!</a>
+                  @foreach ($user->unreadNotifications as $notitication)
+                      
+                         <li>
+                            @if( $notitication->type == 'App\Notifications\ScrapOrderNotification')  
+                            <a class="black-text" href="{{route('admin.scrap.index')}}">
+                                <span class="material-icons icon-bg-circle cyan small">add_shopping_cart</span> 
+                                  
+                                     A new order has been placed! 
+                                     <span style = "font-size:12px">
+                                        
+                                        @isset($notitication->data['name']) 
+                                             By   <span class="font-bold"> {{ $notitication->data['name'] }} </span> 
+                                        @endisset
+
+                                         @isset($notitication->data['scrap_num']) 
+                                             Order Num IS: <span class="font-bold"> 
+                                                {{ $notitication->data['scrap_num'] }} 
+                                            </span>
+                                        @endisset
+                                    </span>    
+                        </a>
+                          <time style = "margin-top: 10px" class="media-meta grey-text darken-2" datetime="2015-06-12T20:50:48+08:00">
+                                {{
+                                    $notitication->created_at
+                                }}
+                          </time>
+                         @endif
+                          
+                        </li>
+
+                  @endforeach
+                   {{--  <li><a class="black-text" href="#!"><span class="material-icons icon-bg-circle cyan small">add_shopping_cart</span> A new order has been placed!</a>
                         <time class="media-meta grey-text darken-2" datetime="2015-06-12T20:50:48+08:00">2 hours ago</time>
                     </li>
                     <li><a class="black-text" href="#!"><span class="material-icons icon-bg-circle red small">stars</span> Completed the task</a>
@@ -38,7 +85,7 @@
                     </li>
                     <li><a class="black-text" href="#!"><span class="material-icons icon-bg-circle amber small">trending_up</span> Generate monthly report</a>
                         <time class="media-meta grey-text darken-2" datetime="2015-06-12T20:50:48+08:00">1 week ago</time>
-                    </li>
+                    </li> --}}
                 </ul>
                 <!-- profile-dropdown-->
                 <ul class="dropdown-content" id="profile-dropdown">
@@ -141,3 +188,28 @@
 <ul class="display-none" id="search-not-found">
     <li class="auto-suggestion"><a class="collection-item display-flex align-items-center" href="#"><span class="material-icons">error_outline</span><span class="member-info">No results found.</span></a></li>
 </ul>
+
+@push('scripts')
+
+<script type="text/javascript">
+   async function readNotification() {
+      const res =   await fetch('/admin/notification/read', {
+             method: 'POST', // *GET, POST, PUT, DELETE, etc.
+             headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                "X-Requested-With": "XMLHttpRequest",
+                "X-CSRF-Token": $('input[name="_token"]').val()
+              },
+        });
+let resonse = await res.text();
+const result = JSON.parse(resonse);
+     if (result.data) 
+     {
+        $("#notification-count small").text(0)
+        $("#notification-count a[href='#']").removeAttr("href").css("cursor","pointer");
+
+     }
+    }
+</script>
+@endpush

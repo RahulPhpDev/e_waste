@@ -1,5 +1,6 @@
 <tr>
     <td> {{$record->id}} </td>
+    <td> {{$record->scrap_num}}</td>
     <td> {{$record->user->name}}</td>
     <td> {{$record->category->name}} </td>
     <td> {{$record->phone}} </td>

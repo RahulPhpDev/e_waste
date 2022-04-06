@@ -10,7 +10,8 @@ use App\Models\Scrap;
 use Illuminate\Support\Facades\DB;
 use App\Models\UserAddress;
 use Illuminate\Support\Arr;
-
+use App\User;
+use App\Notifications\ScrapOrderNotification;
 
 class SellController extends Controller
 {
@@ -19,9 +20,10 @@ class SellController extends Controller
     {
              DB::beginTransaction();
              try {
+                    $user = \Auth::user();
                      if ( !$request->user_address_id )
                      {
-                        $userAddress = \Auth::user()->address()->create( $request->storeInAddress());
+                        $userAddress = $user->address()->create( $request->storeInAddress());
                      } else {
                          $userAddress = UserAddress::findOrFail($request->user_address_id);
                      }
@@ -56,7 +58,16 @@ class SellController extends Controller
                     // }
                 // }
 
-                    DB::commit();
+                
+                $adminUser =  User::where('role_id', 1)->first();
+                $noticitionRecord = [
+                    'name' => $user->name,
+                    'phone' => $user->phone,
+                    'scrap_id' => $scrap->id,
+                    'scrap_num' => $scrap->scrap_num
+                ];
+                \Notification::send($adminUser,new ScrapOrderNotification($noticitionRecord) );
+             DB::commit();
                 return response()->json([
                     'success' => 'true'
                 ]);
