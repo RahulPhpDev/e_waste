@@ -12,18 +12,6 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-// use Notification;
-// use App\Notifications\ScrapOrderNotification;
-// Route::get('noti', function () {
-//    $data = [
-//          'user_id' => 12,
-//          'msg' => 'Order created'
-//    ];
-// $adminUser =  \App\User::where('role_id', 1)->get()->first();
-// // dd($adminUser);
-// Notification::send($adminUser,new ScrapOrderNotification($data) );
-// dd('test');
-// })
 Route::get('/', function () {
     return redirect('/login');
 });
@@ -31,7 +19,7 @@ Route::get('/', function () {
 
 Auth::routes(
     [
-        'register' => false, // Registration Routes...
+        'register' => true, // Registration Routes...
         'reset' => false, // Password Reset Routes...
         'verify' => false, // Email Verification Routes...
     ]
@@ -116,7 +104,9 @@ Route::group([
             ->name('video.bilingual');
 
     Route::patch('scrap/{id}/approval', 'ScrapController@approval')->name('scrap.approval');      
-      Route::resource('scrap', 'ScrapController');     
+      Route::resource('scrap', 'ScrapController'); 
+      
+      Route::get('/export/scrap', 'ScrapReportController@index');
 
 });
 
