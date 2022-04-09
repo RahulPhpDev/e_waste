@@ -106,7 +106,8 @@ Route::group([
     Route::patch('scrap/{id}/approval', 'ScrapController@approval')->name('scrap.approval');      
       Route::resource('scrap', 'ScrapController'); 
       
-      Route::get('/export/scrap', 'ScrapReportController@index');
+      Route::get('/report', 'ScrapReportController@index');
+      Route::post('/report', 'ScrapReportController@export')->name('report.scrap');
 
 });
 

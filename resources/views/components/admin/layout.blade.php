@@ -1,8 +1,10 @@
 <html>
 {{--@section('header')--}}
 @include('layouts/admin/header')
+ @stack('css')
 {{--@show--}}
 {{--@section('sidebar')--}}
+
     @include('layouts/admin/sidebar')
     {{--@show--}}
 

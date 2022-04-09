@@ -78,6 +78,12 @@
                     icon="event"
                 />
 
+                <x-admin.navigation
+                    names='Report'
+                    link='admin.report.scrap'
+                    icon="report"
+                />
+
              
 
     </ul>

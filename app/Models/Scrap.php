@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\User;
 use Illuminate\Support\Str;
-
+use Carbon\Carbon;
 class Scrap extends Model
 {
 	use SoftDeletes;
@@ -97,6 +97,44 @@ class Scrap extends Model
 	 // 	return $this->belongsToMany(Product::class, 'scrap_product')->withPivot('name', 'quantity', 'price');
 	 // }
 
+public function filterData( $request, $statusVal, $selectzone )
+{
+	  // $uri = $request->getRequestUri();
+	$startDate = null;
+	$endDate = null;
+           if ($request->daterange)
+           {
+                 $dateArr = explode(" -" ,$request->daterange);
+                 $startDate = trim($dateArr[0]);
+                 $endDate =  trim($dateArr[1]);
+                 // dd($startDate, $endDate , $request->daterange);
+           }
 
-    //
+           
+	return Scrap::query()
+                ->with('user','scrapproducts')
+                ->when(
+                       isset($statusVal), function ($query) use ($statusVal) { 
+                       			 return $query->where('status', $statusVal);
+                        }
+                )
+                 ->when(
+                       isset($selectzone), function ($query) use ($selectzone) { 
+                       			 return $query->where('zone_id', $selectzone);
+                        }
+                )
+                 ->when(
+                 	 isset($request->daterange)  , function ($query) use ($startDate, $endDate) 
+                 	 {
+                 	 	// 2022-08-16
+                 	 	// ::parse($moment->created_at)->format('m/d/Y h:m') 
+                 	 	$startDate = Carbon::parse($startDate)->format('Y-m-d');
+                 	 	$endDate = Carbon::parse($endDate)->format('Y-m-d');
+                 	 	// dd($startDate, $endDate);
+                 	 	return $query->whereBetween('created_at', [$startDate, $endDate] );
+                 	 }
+                 )
+                ->orderByDesc('id');
+                // ->paginate( PaginationEnum::Show10Records );
+	}
 }

@@ -17,7 +17,7 @@
             @csrf
             @method('patch')
                 <select name ="status">
-                    <option> Select </option>
+                    <option value = {{$record->status }}> Select </option>
                     <option value = "1"> Approve </option>
                     <option value = "2"> Discard </option>
                 </select>
