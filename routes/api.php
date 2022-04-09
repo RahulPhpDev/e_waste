@@ -22,7 +22,15 @@ Route::group([
 'namespace' => 'Guest'
 ], function () {
        Route::get('why-we','HomePageController@whyWe' );
-       Route::get('sstore','HomePageController@store' );
+       Route::get('store','HomePageController@store' );
+       Route::get('page/privacy', function () {
+            return response()->json(
+                [
+                    'sucess' => true,
+                    'data' => \App\Models\Page::whereType('privacy')->select('description as html')->first()
+                ]
+            );
+       } );
 });
 
 Route::group([
