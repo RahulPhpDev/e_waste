@@ -16,6 +16,10 @@ Route::get('/', function () {
     return redirect('/login');
 });
 
+Route::get('/privacy', function () {
+    return view('guest.privacy');
+});
+
 
 Auth::routes(
     [
