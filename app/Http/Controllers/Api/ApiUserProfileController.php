@@ -38,13 +38,14 @@ class ApiUserProfileController extends Controller
         $user->update( $request->storeInProfile() );
 
          $user->translate();
-        if ( $user->address === null )
-        {
-
-            $address = $user->address()->save( new UserAddress($request->storeInAddress() ) )->translate();
-        } else {
-            $address =  $user->address->update( $request->storeInAddress() );
-            $user->address->translate();
+if (collect($request->storeInAddress())->count() > 1) {
+            if ( $user->address === null )
+            {
+                $address = $user->address()->save( new UserAddress($request->storeInAddress() ) )->translate();
+            } else {
+                $address =  $user->address->update( $request->storeInAddress() );
+                $user->address->translate();
+            }
         }
 
 
