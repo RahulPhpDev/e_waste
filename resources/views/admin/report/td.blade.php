@@ -2,7 +2,7 @@
     <td> {{$record->id}} </td>
     <td> {{$record->scrap_num}}</td>
     <td> {{$record->user->name}}</td>
-    <td> {{$record->category->name}} </td>
+   <td> {{$record->scrapproducts[0] && $record->scrapproducts[0]->category ? $record->scrapproducts[0]->category->name : ''}} </td>
     <td> {{$record->phone}} </td>
   
     <td> 

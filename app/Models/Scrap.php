@@ -111,7 +111,7 @@ public function filterData( $request, $statusVal, $selectzone )
 
            
 	return Scrap::query()
-                ->with('user','scrapproducts')
+                ->with('user','scrapproducts', 'scrapproducts.category')
                 ->when(
                        isset($statusVal), function ($query) use ($statusVal) { 
                        			 return $query->where('status', $statusVal);
