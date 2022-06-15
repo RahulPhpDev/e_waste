@@ -25,7 +25,7 @@ class Scrap extends Model
 	//     'type'=> 'integer'
 	// ];
 
-	 protected $with = ['userAddress', 'category','schedule','zone'];
+	 protected $with = ['userAddress','schedule','zone'];
 
 	protected static function boot()
 	{
@@ -79,7 +79,6 @@ class Scrap extends Model
 	 }
 
 	 public function getScrapStatusAttribute() {
-		// dd($this);
 		 switch($this->status) {
 			case 0:
 				return 'Pending';

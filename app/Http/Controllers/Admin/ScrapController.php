@@ -32,7 +32,7 @@ class ScrapController extends Controller
            ?  $status[$request->get('status')] 
            : null;
            $records = Scrap::query()
-                ->with('user','scrapproducts')
+                ->with('user','scrapproducts', 'scrapproducts.category')
                 ->when(
                        isset($statusVal), function ($query) use ($statusVal) { 
                         return $query->where('status', $statusVal);
@@ -40,7 +40,7 @@ class ScrapController extends Controller
                 )
                 ->orderByDesc('id')
                 ->paginate( PaginationEnum::Show10Records );
-
+// dd( $records->first()->scrapproducts[0]);
  
        return view('admin/scrap/index' , compact('records'), ['status' => $request->get('status')]);
     }
@@ -74,7 +74,7 @@ class ScrapController extends Controller
      */
     public function show($id)
     {
-       $record = Scrap::with('scrapproducts')->find($id);
+       $record = Scrap::with('scrapproducts', 'scrapproducts.category')->find($id);
         return view('admin/scrap/detail', compact('record') );
     }
 

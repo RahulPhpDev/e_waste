@@ -15,7 +15,7 @@ class ScrapExport implements FromCollection, WithHeadings
 
     public $excelColoum = [
            'id' => 'Id',
-           'scrap_num' => 'Scrap Num',
+            'Scrap Num' => 'Scrap Num',
             'user_name' => 'User',
             'phone'=> 'Phone',
             'zone_name'=> 'Collection Store',
@@ -71,19 +71,19 @@ class ScrapExport implements FromCollection, WithHeadings
               $statusRe = array_reverse(array_keys($status));
 
             $reference_mails = $records->map(function($item) use ($statusRe){
-              
+            // dd( $item['userAddress']);
                 $outputArray = [];
                 $output = new \stdClass();
                 $output->id = $item->id;
                 $output->scrap_num = $item->scrap_num;
                 $output->phone = $item->phone;
                 $output->created_at = $item->created_at->toDateString();
-                $output->status = $statusRe[$item->status];
+                $output->status = $item->getScrapStatusAttribute($item->status);
                 $output->order_user_name = $item->user_name;
                 $output->zone_name = $item['zone']->name;
                 $output->schedule_date = $item['schedule']->date;
                 $output->schedule_time = $item['schedule']->time;
-                $output->userAddress_flat = $item['userAddress']->flat;
+                $output->userAddress_flat = $item['userAddress']->flat. ' ,'.$item['userAddress']->zip_code.' , '.$item['userAddress']->district->name;
                 $output->user_name = $item['user']->name;
                 return $output;
             });
@@ -93,17 +93,17 @@ return $reference_mails;
     public function headings(): array
     {
         return [
-              'id', 
-                'scrap_num', 
-                'phone', 
-                'created_at', 
-                'status', 
-                'order_user_name', 
-                'zone_name', 
-                'schedule_date', 
-                'schedule_time', 
-                'userAddress_flat', 
-                'user_name'
+                "ID", 
+                'Scrap Num', 
+                'Phone', 
+                'Created_at', 
+                'Status', 
+                'user Name', 
+                'Zone', 
+                'Schedule Date', 
+                'Schedule Time', 
+                'UserAddress', 
+                'Order By'
         ];
     }
 }

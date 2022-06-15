@@ -14,6 +14,7 @@ class UserAddress extends Model
 
 	public $translatable = ['flat', 'area', 'landmark'];
 
+	public $with = ['district'];
 	// protected $casts = [
 	//     'district_id' => 'integer',
 	//     'zip_code'=> 'integer'

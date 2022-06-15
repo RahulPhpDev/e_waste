@@ -30,6 +30,10 @@
   </div>
 
   <div class="tab-pane active show" id="profile">
+      <h6>  Category: <span>  {{$record->scrapproducts[0] && $record->scrapproducts[0]->category ? $record->scrapproducts[0]->category->name : ''}} </span>  </h6>
+  </div>
+
+  <div class="tab-pane active show" id="profile">
       <h6> Zone: <span> {{$record->zone->name}}</span>  </h6>
   </div>
 

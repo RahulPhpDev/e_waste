@@ -12,13 +12,6 @@ class ScrapProduct extends Model
 
 	public $table = 'scrap_product';
 
-	// protected $casts = [
-	//     'scrap_id' => 'integer',
-	//     'category_id'=> 'integer',
-	//     'quantity'=> 'integer',
-	//     'status'=> 'integer'
-	// ];
-
 	 protected $guarded = [];
 
  	 public $translatable = ['name', 'description'];
@@ -29,6 +22,14 @@ class ScrapProduct extends Model
 	 public function image()
 	 {
 	 	return $this->morphOne(Image::class, 'imageable');
+	 }
+
+	 public function category() {
+	 	return $this->belongsTo(Category::class);
+	 }
+	  public function type ()
+	 {
+	 	return $this->belongsTo(Type::class);
 	 }
 	 
     //

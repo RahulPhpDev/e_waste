@@ -43,13 +43,10 @@ class ScrapReportController extends Controller
 
     public function export(Request $request)
     {   
-        // $uri = $request->getRequestUri();
-        // $dateArr = explode("-",$request->daterange);
-        // dd($dateArr);
         $now = Carbon::now();
         $nowDate = $now->toDateString();
         $lastThree = Str::of(now()->timestamp)->substr(-3);
           return  Excel::download(new ScrapExport($request), "scrap_report_$nowDate.'_'.$lastThree.csv");
-            // dd(  $records->get());
+        
     }
 }

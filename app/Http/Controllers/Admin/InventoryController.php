@@ -27,6 +27,7 @@ class InventoryController extends Controller
     {
        $records = Product::with('inventory', 'inventory.image' , 'inventory.type')
                         ->findOrFail($product_id);
+                        dd($records);
        return view('admin.inventory.index', compact('records'));
     }
 
