@@ -25,7 +25,7 @@ class ProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'unit_id' => 'required',
+            // 'unit_id' => 'required',
             'category_id' => 'required',
             'name' => 'required',
             'description' => '',
@@ -58,7 +58,7 @@ class ProductRequest extends FormRequest
 
     public function createProductDetails()
     {
-        return $this->only('uuid','price' ,'unit_id', 'category_id', 'name', 'description', 'active','created_by');
+        return $this->only('uuid','price' , 'category_id', 'name', 'description', 'active','created_by');
     }
 
      /**
@@ -77,7 +77,7 @@ class ProductRequest extends FormRequest
 
     public function updateProductDetails()
     {
-        return $this->only('unit_id', 'price' ,'category_id', 'name', 'description');
+        return $this->only('price' ,'category_id', 'name', 'description');
     }
 
     /**
