@@ -59,17 +59,19 @@ Route::group([
     Route::apiResource('profile', 'ApiUserProfileController');
     Route::get('video','ApiVideoController@index' );
     Route::apiResource('event', 'ApiEventController')->only('index', 'show');
+    Route::apiResource('notification', 'ApiNotificationController');
 
     // buyer-api
+    Route::group([
+    'middleware' => 'buyer',
+    // 'namespace' => 'buyer'
+    ], function () {
+        Route::get('buyer/category','ApiCategoryController@index' )->name('buyer.category');
+        Route::get('buyer/product','Buyer/BuyerProductController@index' )->name('buyer.category');
+     
+        Route::get('buyer/product','Buyer\BuyerProductController@index' )->name('buyer.category');
+});
 
-    Route::get('buyer/category','ApiCategoryController@index' )->name('buyer.category');
-
-
-    Route::get('buyer/product','Buyer/BuyerProductController@index' )->name('buyer.category');
- 
-    Route::get('buyer/product','Buyer\BuyerProductController@index' )->name('buyer.category');
-
-    Route::apiResource('notification', 'ApiNotificationController');
    
 
     });

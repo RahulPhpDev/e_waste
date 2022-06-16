@@ -10,14 +10,17 @@ use Illuminate\Http\Request;
 
 class BuyerProductController extends Controller
 {
-   public function index() {
+   public function index(Request $request) {
 
        $catgory = CategoryResource::collection(Category::with('image')->get());
-
+       $product =  Product::with('image')->when($request->category_id, function ($model) use($request) {
+            return $model->where('category_id',  $request->category_id);
+        }
+       )->get();
        return collect([
+           'product' => $product,
            'category' => $catgory,
-         'product' =>  Product::with('image')->get(),
-         'sucess' => true
+           'sucess' => true
        ]);
        
 

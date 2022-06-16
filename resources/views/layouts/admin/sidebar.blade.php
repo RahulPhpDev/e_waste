@@ -52,6 +52,13 @@
                     link='admin.scrap.index'
                     icon="add_to_photos"
                 />
+                
+
+                <x-admin.navigation
+                    names='Report'
+                    link='admin.report.scrap'
+                    icon="report"
+                />
 
                  <x-admin.navigation
                     names='WhyWe'
@@ -76,12 +83,6 @@
                     names='Event'
                     link='admin.event.index'
                     icon="event"
-                />
-
-                <x-admin.navigation
-                    names='Report'
-                    link='admin.report.scrap'
-                    icon="report"
                 />
 
              

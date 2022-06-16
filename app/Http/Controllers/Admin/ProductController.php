@@ -109,7 +109,7 @@ class ProductController extends Controller
         $product->loadMissing('inventory', 'category', 'unit');
         $units = Unit::pluck( 'name' , 'id')->prepend('Select Unit', '' );
         $categories = Category::pluck('name', 'id')->prepend('Select Category', '');
-         $types = Type::pluck('name', 'id'   )->prepend('Select Type', '');
+        $types = Type::pluck('name', 'id'   )->prepend('Select Type', '');
         return view('admin/product/edit', [
             'record' => $product,
             'units' => $units,
@@ -128,7 +128,7 @@ class ProductController extends Controller
     public function update(ProductRequest $request, Product $product)
     {
         $product->update( $request->updateProductDetails() );
-        $product->inventory()->save( $request->updateProductInventoryDetails()  );
+        // $product->inventory()->save( $request->updateProductInventoryDetails()  );
         return redirect()->route('admin.product.index')->with('success',FlashMessagesEnum::CreatedMsg);
     }
 

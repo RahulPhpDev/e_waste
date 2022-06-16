@@ -75,7 +75,7 @@
                     </div>
 
 
-                     <div class="input-field col m6 s6" >
+                     {{-- <div class="input-field col m6 s6" >
                         <label
                             for="type_id"
                             class="active">
@@ -86,7 +86,7 @@
 
                         >
                             @foreach( $types as $vn => $vt)
-                                <option value ="{{ $vn  }}">{{ $vt  }} </option>
+                                <option  @if($record->type_id == $vn) selected @endIf value ="{{ $vn  }}">{{ $vt  }} </option>
                             @endforeach
                         </select>
                         @error('type_id')
@@ -94,27 +94,28 @@
                                 {{ $message }}
                             </span>
                         @enderror
-                    </div>
+                    </div> --}}
 
 
                     </div>
 
-
-
-                    <div class="row" >
-
-
-
-
-
-
-
-                        </div>
+                       
 
                         <div class="row">
 
-                            <div class="input-field col m6 s6" >
-                        <label for="description" class="active"> Description</label>
+                             <div class="input-field col m6 s6">
+                             <label for="name" class="active"> Price </label>
+                            <input id="price" type="text" class = 'validate' value = "{{ $record->price }}" name = 'price'>
+
+                            @error('price')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        </div>
+ <div class="row">
+                            <div class="input-field col m12 s12" >
+                                <label for="description" class="active"> Description</label>
                               <textarea id = "description" name = "description" id="message5" class="materialize-textarea">{{$record->description}}</textarea>
 
                             @error('description')

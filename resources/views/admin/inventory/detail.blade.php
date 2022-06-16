@@ -2,7 +2,11 @@
   <div class="row">
             <div class="col-lg-6 col-md-12">
               <div class="card">
-
+                @component('partials.back-component',
+                        [
+                            'link' =>'admin.scrap.index'
+                        ])
+               @endcomponent
 
                 <div class="card-body">
                   <div class="tab-content">

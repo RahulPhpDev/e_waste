@@ -44,10 +44,10 @@ class RegisterController extends Controller
     protected function create(Request $request)
     {
 
-    $validator = Validator::make($request->all(), [
-             // 'phone_number' => ['required',  'regex:/[0-9]{10}/', 'digits:10', 'unique:users,phone'],
+        $validator = Validator::make($request->all(), [
              'phone_number' => ['required',  'regex:/[0-9]{10}/', 'digits:10'],
         ]);
+
        if ( $validator->fails() )
        {
         return $validator->validate();
@@ -56,11 +56,11 @@ class RegisterController extends Controller
       if ( $res  = $this->checkLogin($request) ) {
         return $res;
       }
-        $randomNumber = random_int(1000, 9999);
+        $randomNumber = $request->input('password', random_int(1000, 9999));
 
         $user =  User::create([
-            'name' => 'Guest',
-            'role_id' => 3,
+            'name' => $request->input('name', 'Guest'),
+            'role_id' => $request->user && strtolower($request->user) === 'buyer' ? \App\Models\Role::whereName('Buyer')->first()->id   : 3,
             'active' => 1,
             'phone' => $request['phone_number'],
             'password' => Hash::make($randomNumber),

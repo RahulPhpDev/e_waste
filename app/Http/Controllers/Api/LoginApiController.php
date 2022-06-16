@@ -16,19 +16,11 @@ class LoginApiController extends Controller
 
 
         public function login (Request $request) {
-        $validator = Validator::make($request->all(), [
 
-            // 'phone' => 'required',
-            // 'otp' => 'required',
-            // 'country_code' => 'required',
-
-            // 'email' => 'required_with:password',
-            // 'password' => 'required_with:email',
-
-             'phone' => 'required_with_all:otp',
-            'otp' => 'required_with_all:phone',
-
-        ]);
+            $validator = Validator::make($request->all(), [
+                    'phone' => 'required_with_all:otp',
+                    'otp' => 'required_with_all:phone',
+            ]);
         if ($validator->fails())
         {
             return response(['errors'=>$validator->errors()->all()], 422);
@@ -40,16 +32,25 @@ class LoginApiController extends Controller
         } else {
         	$user = User::where('phone', $request->phone)->first();
         }
+        
         if ($user) {
 
             if (Hash::check($matchForPassword, $user->password)) {
                 // $token = $user->createToken('authToken')->accessToken;
+                // @todo maybe not required
+                if ($request->user &&   strtolower($request->user) === 'buyer') {
+                   $buyerRole =  $user->role_id === \App\Models\Role::whereName('Buyer')->first()->id;
+                   if (!$buyerRole)  {
+                          $response = ["message" => "Not a buyer user", 'success'=> false];
+                           return response($response, 422); 
+                   }
+                }
               $token = $user->createToken($user->id)->plainTextToken;
                 // dd($token->token);
                 // $user->token = $token->token;
                 $user->token = $token;
                 $response = [
-                               'success' => true,
+                              'success' => true,
                               'msg' => 'Otp Verified',
                               'data' => $user
                           ];

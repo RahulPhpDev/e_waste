@@ -2,6 +2,11 @@
     <div class="col s12 m12 l12">
         <div id="responsive-table" class="card card card-default scrollspy">
             <div class="card-content">
+                @component('partials.back-component',
+                                        [
+                                            'link' =>'admin.product.index'
+                                        ])
+                            @endcomponent
                 <h4 class="card-title camel-case">
                   {{$records->name }} Inventory
 
@@ -23,7 +28,7 @@
                             @component('partials.th',
                                         [
                                             'tableHeads' =>
-                                                ['ID','Type', 'Quantity', 'Base Price','Status','Image', 'Action']
+                                                ['ID','Type', 'Quantity','Status','Image', 'Action']
                                         ])
                             @endcomponent
 

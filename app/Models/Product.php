@@ -11,6 +11,7 @@ class Product extends Model
 
 	 protected $guarded = [];
 
+	 protected $appends = ['product_quantity'];
 
 	public function unit()
 	{
@@ -32,6 +33,12 @@ class Product extends Model
 	public function image()
 	{
 		return $this->morphOne(Image::class, 'imageable');
+	}
+
+	public function getProductQuantityAttribute()
+	{
+		return $this->inventory()->where('approved', 1)->sum('quantity');
+
 	}
     //
 }

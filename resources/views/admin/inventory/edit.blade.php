@@ -56,7 +56,7 @@
 
 
                         <div class="row">
-
+{{-- 
                        <div class="input-field col m6 s6">
 
                            <label for="price" class="active"> Price(total) </label>
@@ -65,7 +65,7 @@
                             @error('price')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
-                        </div>
+                        </div> --}}
 
 
 

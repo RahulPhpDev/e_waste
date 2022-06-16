@@ -115,7 +115,7 @@
                            <div class="input-field col m6 s6">
 
 
-                           <label for="price" class="active"> Price(total) </label>
+                           <label for="price" class="active"> Price(per piece) </label>
                               <input id = "price" name = "price" id="price"/>
 
                             @error('price')

@@ -2,7 +2,6 @@
     <td> {{$record->id}} </td>
     <td> {{$record->type->name}} </td>
     <td> {{$record->quantity}}</td>
-    <td> {{$record->price}} </td>
 
 
 

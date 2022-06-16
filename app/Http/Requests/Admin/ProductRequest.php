@@ -30,7 +30,7 @@ class ProductRequest extends FormRequest
             'name' => 'required',
             'description' => '',
             'price' => 'numeric',
-            'type_id' => 'required',
+            // 'type_id' => 'required',
             'quantity' => 'numeric'
 
         ];
@@ -58,7 +58,7 @@ class ProductRequest extends FormRequest
 
     public function createProductDetails()
     {
-        return $this->only('uuid', 'unit_id', 'category_id', 'name', 'description', 'active','created_by');
+        return $this->only('uuid','price' ,'unit_id', 'category_id', 'name', 'description', 'active','created_by');
     }
 
      /**
@@ -67,7 +67,7 @@ class ProductRequest extends FormRequest
 
     public function createProductInventoryDetails()
     {
-        return $this->only('type_id', 'price', 'approved', 'quantity', 'created_by');
+        return $this->only('type_id',  'approved', 'quantity', 'created_by');
     }
 
 
@@ -77,7 +77,7 @@ class ProductRequest extends FormRequest
 
     public function updateProductDetails()
     {
-        return $this->only('unit_id', 'category_id', 'name', 'description');
+        return $this->only('unit_id', 'price' ,'category_id', 'name', 'description');
     }
 
     /**
@@ -86,7 +86,7 @@ class ProductRequest extends FormRequest
 
     public function updateProductInventoryDetails()
     {
-        return $this->only('type_id', 'price', 'category_id',  'quantity');
+        return $this->only('type_id','category_id',  'quantity');
     }
 
 
