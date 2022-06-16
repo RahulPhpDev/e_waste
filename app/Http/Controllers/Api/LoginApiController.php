@@ -40,7 +40,6 @@ class LoginApiController extends Controller
                 // @todo maybe not required
                 if ($request->user &&   strtolower($request->user) === 'buyer') {
                    $buyerRole =  $user->role_id == \App\Models\Role::whereName('Buyer')->first()->id;
-                   dd($buyerRole,  $user);
                    if (!$buyerRole)  {
                           $response = ["message" => "Not a buyer user", 'success'=> false];
                            return response($response, 422); 
