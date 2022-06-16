@@ -2,7 +2,7 @@
     <td> {{$record->id}} </td>
     <td> {{$record->name}}</td>
     <td> {{$record->unit->name}} </td>
-    <td> {{$record->category->name}} </td>
+    {{-- <td> {{$record->category->name}} </td> --}}
     <td> {{$record->price}} </td>
 
 

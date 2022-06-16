@@ -79,6 +79,7 @@ class ProductController extends Controller
         return redirect()->route('admin.product.index')->with('success',FlashMessagesEnum::CreatedMsg);
 
             } catch (\Exception $e) {
+                // dd($e->getMessage());
             DB::rollback();
             return redirect()->route('admin.product.create');
         }
