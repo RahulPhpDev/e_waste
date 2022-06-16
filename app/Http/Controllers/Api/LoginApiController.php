@@ -39,7 +39,7 @@ class LoginApiController extends Controller
                 // $token = $user->createToken('authToken')->accessToken;
                 // @todo maybe not required
                 if ($request->user &&   strtolower($request->user) === 'buyer') {
-                   $buyerRole =  $user->role_id === \App\Models\Role::whereName('Buyer')->first()->id;
+                   $buyerRole =  $user->role_id == \App\Models\Role::whereName('Buyer')->first()->id;
                    dd($buyerRole,  $user);
                    if (!$buyerRole)  {
                           $response = ["message" => "Not a buyer user", 'success'=> false];
