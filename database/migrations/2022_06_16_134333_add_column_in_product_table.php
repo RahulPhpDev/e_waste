@@ -13,12 +13,12 @@ class AddColumnInProductTable extends Migration
      */
     public function up()
     {
-        Schema::table('products', function (Blueprint $table) {
-          $table->string('price')->after('hi_name')->default('0.00');
-        });
-         Schema::table('inventories', function (Blueprint $table) {
-            $table->dropColumn('price');
-        });
+        // Schema::table('products', function (Blueprint $table) {
+        //   $table->string('price')->after('hi_name')->default('0.00');
+        // });
+        //  Schema::table('inventories', function (Blueprint $table) {
+        //     $table->dropColumn('price');
+        // });
     }
 
     /**

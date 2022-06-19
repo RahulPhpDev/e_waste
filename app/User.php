@@ -6,7 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use App\Models\{Role, Scrap, Zone, UserAddress,Image};
+use App\Models\{Role, Scrap, Zone, UserAddress,Image, Cart};
 use App\Traits\TranslatorTrait;
 
 class User extends Authenticatable
@@ -81,5 +81,10 @@ class User extends Authenticatable
     public function image()
     {
         return $this->morphOne(Image::class, 'imageable');
+    }
+
+    public function cart() 
+    {
+        return $this->hasOne(Cart::class);
     }
 }
