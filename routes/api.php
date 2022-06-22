@@ -71,6 +71,7 @@ Route::group([
      
         Route::get('buyer/product','Buyer\BuyerProductController@index' )->name('buyer.category');
         Route::apiResource('buyer/cart','Buyer\CartController');
+        Route::apiResource('buyer/order','Buyer\OrderController');
 });
 
    

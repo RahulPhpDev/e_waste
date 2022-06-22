@@ -15,8 +15,7 @@ class BuyerMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if ( $request-> user() &&  $request-> user()->role_id == 4 ){
-
+        if ( $request-> user()  ){
             return $next($request);
         }
        $response = ["message" => "Not a buyer user", 'success'=> false];
