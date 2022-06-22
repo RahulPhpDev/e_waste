@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Enums\OrderStatusEnum;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
+use Auth;
 class Order extends Model
 {
 	 use SoftDeletes;
@@ -32,10 +33,31 @@ protected static function boot()
 		parent::boot();
 		self::created( function ($model) {
 			$model->order_num = 'EWMUO-'.Str::of(now()->timestamp)->substr(-3).$model->id;
-
+			$model->deleteIfProductHasInCart();
 			$model->save();
 		});
 	}
+
+	public function deleteIfProductHasInCart(){
+	 $cart = 	$this->hasProductInCart();
+	 if ($cart && $cart->exists() )
+	 {
+	 	$cartProduct =  $cart->cartProduct->first();
+	 	$cartProduct->delete();
+	 	$cartProduct->save();
+	 	return true;
+	 }
+	 return false;
+	}
+
+	public function hasProductInCart()
+	{
+		return Cart::whereHas('cartProduct', function($query) {
+					return $query->where('product_id', '=',$this->product_id);
+				})->with('cartProduct')->where('user_id', $this->user_id)->first();
+		
+	}
+
 
 	 public function orderAddress() {
 	 	return $this->hasOne(OrderAddress::class);

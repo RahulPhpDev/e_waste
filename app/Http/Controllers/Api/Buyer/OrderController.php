@@ -9,6 +9,10 @@ use App\Models\{Order,Product,OrderAddress};
 use App\Http\Requests\Api\Buyer\OrderRequest;
 use Illuminate\Support\Facades\DB;
 use Auth;
+use App\User;
+use App\Notifications\OrderNotification;
+
+
 class OrderController extends Controller
 {
     /**
@@ -33,18 +37,11 @@ class OrderController extends Controller
     public function store(OrderRequest $request)
     {
         DB::beginTransaction();
-        try {
-            $product = Product::findOrFail($request->product_id);
-            $price = $product->price;
-               $order =  Order::create([
-                    'product_id' => $product->id,
-                    'price' => $price,
-                    'quantity' =>$request->input('quantity', 1),
-                    'user_id' => Auth::user()->id
-                ]);
 
-            
-              $order->orderAddress()->create([
+        try {
+            $adminUser =  User::where('role_id', 1)->first();
+            $userId =  Auth::user()->id;
+            $address = [
                   'email' => $request->input('email', null),
                   'phone' => $request->input('phone', null),
                   'alternative_phone' => $request->input('alternative_phone', null),
@@ -52,10 +49,31 @@ class OrderController extends Controller
                   'address' => $request->input('address', null),
                   'landmark' => $request->input('landmark', null),
                   'district' => $request->input('district', null),
-                  'state' => $request->input('state', null),
+                  'state' => 2,
                   'comment' => $request->input('comment', null),
-               ]);
-              
+               ];
+            $order_count =0; 
+            foreach ($request->product as $key => $item) {
+                $product = Product::findOrFail($item['id']);
+                       $price = $product->price;
+                       $order =  Order::create([
+                            'product_id' => $product->id,
+                            'price' => $price,
+                            'quantity' =>$item['quantity'] || 1,
+                            'user_id' => $userId
+                        ]);
+                
+                  $order->orderAddress()->create($address);
+                  ++$order_count;
+            }
+
+
+               \Notification::send($adminUser,new OrderNotification([
+                    'user' => Auth::user()->name,
+                    'order_count' => $order_count,
+                    'link' => '/order'
+               ]) );
+            
                DB::commit();
                 return response()->json([
                     'success' => 'true'

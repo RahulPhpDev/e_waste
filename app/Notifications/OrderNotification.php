@@ -7,19 +7,20 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class ScrapOrderNotification extends Notification
+class OrderNotification extends Notification
 {
     use Queueable;
 
-    private $user;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
+    protected $data;
+    
     public function __construct($data)
     {
-        $this->data = $data;
+       $this->data = $data;
     }
 
     /**
@@ -55,19 +56,14 @@ class ScrapOrderNotification extends Notification
      */
     public function toArray($notifiable)
     {
-        //dd($this->user, 'toarray');
         return [
-            'name' => $this->user->name,
-            'phone' => $this->user->phone
+            //
         ];
     }
-    public function toDatabase($notifiable) 
+
+     public function toDatabase($notifiable) 
     {
-        return [
-            'name' => $this->data['name'],
-            'phone' => $this->data['phone'],
-            'scrap_id' => $this->data['scrap_id'],
-            'scrap_num' => $this->data['scrap_num'],
-        ];   
+        // XYZ have created 4 Order , link
+        return ['msg' => $this->data['user'].' have created '.$this->data['order_count']. ' Order . Visit the link '.$this->data['link']];
     }
 }

@@ -24,8 +24,8 @@ class OrderRequest extends FormRequest
     public function rules()
     {
         return [
-            'product_id' => 'required', 'exists:App\Models\Product,id',
-            'quantity' => 'required', 'digits',
+            'product.*.id' => ['required', 'exists:App\Models\Product,id'],
+            'product.*.quantity' => ['required', 'digits_between:1,3'],
             'phone'=> ['required', 'digits_between:10,12'],
             'pin_code' => ['required', 'digits:6'],
             'address'=> 'required',
