@@ -45,7 +45,7 @@ class InventoryRequest extends FormRequest
 
     public function createProductInventoryDetails()
     {
-        return $this->only('type_id', 'approved', 'quantity', 'created_by');
+        return $this->only('type_id', 'approved', 'quantity', 'created_by', 'approved');
     }
 
 }

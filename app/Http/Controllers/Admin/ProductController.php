@@ -138,7 +138,7 @@ class ProductController extends Controller
          $product->inventory()->create( $request->createProductInventoryDetails()  );
         } else {
              $inventory->quantity = $request->quantity;
-        $inventory->restore();
+             $inventory->restore();
          // tap($category)->update( $valid )->translate();
         $inventory->save();
         }

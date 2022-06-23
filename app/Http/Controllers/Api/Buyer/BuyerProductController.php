@@ -4,19 +4,27 @@ namespace App\Http\Controllers\Api\Buyer;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Api\CategoryResource;
-use App\Models\Category;
-use App\Models\Product;
+use App\Models\{Product,Category, Cart, CartProduct};
 use Illuminate\Http\Request;
+// use Auth;
 
 class BuyerProductController extends Controller
 {
    public function index(Request $request) {
 
        $catgory = CategoryResource::collection(Category::with('image')->get());
-       $product =  Product::with('image')->when($request->category_id, function ($model) use($request) {
+       $product =  Product::addSelect([
+                    'in_cart' =>  CartProduct::select('id')
+                                ->whereHas('cart' , function ($query) {
+                                    return $query->where('user_id', auth()->user()->id);
+                                })
+                                ->whereColumn('product_id', 'products.id')->limit(1)
+                   ])
+                    ->with('image')->when($request->category_id, function ($model) use($request) {
             return $model->where('category_id',  $request->category_id);
         }
        )->get();
+    
        return collect([
            'product' => $product,
            'category' => $catgory,
