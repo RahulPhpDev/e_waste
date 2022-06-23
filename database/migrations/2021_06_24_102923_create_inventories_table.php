@@ -18,7 +18,7 @@ class CreateInventoriesTable extends Migration
 
             $table->unsignedBigInteger('product_id');
 
-            $table->unsignedBigInteger('type_id');
+            $table->unsignedBigInteger('type_id')->nullable();
 
 
             // $table->string('price')->default('0.00');
