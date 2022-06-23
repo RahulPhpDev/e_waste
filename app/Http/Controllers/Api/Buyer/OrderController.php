@@ -23,7 +23,7 @@ class OrderController extends Controller
     public function index()
     {
         $order = Auth::user()->order;
-        $order->loadMissing('orderAddress', 'product:id,name');
+        $order->loadMissing('orderAddress', 'product:id,name', 'product.image');
 
         return response(['sucees' => true, 'data' => $order], 200);
     }
