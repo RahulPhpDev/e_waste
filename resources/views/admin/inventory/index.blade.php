@@ -13,7 +13,7 @@
                 </h4>
                 <div class="row">
                     <div class="col s12">
-
+{{-- 
                              <a
                            class="modal-trigger
                        waves-effect waves-light btn gradient-45deg-light-blue-cyan z-depth-3 mb-2"
@@ -21,22 +21,16 @@
                            >
 
                            Add {{$records->name }} Inventory
-                       </a>
+                       </a> --}}
 
-                        <table class="responsive-table bordered striped Highlight">
-                            <thead class="text-warning">
-                            @component('partials.th',
-                                        [
-                                            'tableHeads' =>
-                                                ['ID','Type', 'Quantity','Status','Image', 'Action']
-                                        ])
-                            @endcomponent
-
-                            </thead>
-                            <tbody>
-                                  @each('admin.inventory.td-records', $records->inventory, 'record', 'partials.table.empty')
-                            </tbody>
-                        </table>
+                            <div>
+                                @if ($records->product_quantity )
+                                  <h5>   In Stock :{{ $records->product_quantity}} </h5>
+                                @endIf
+                                @if ($records->cartProduct->sum('quantity') )
+                                    <h5>   In Cart :{{ $records->cartProduct->sum('quantity')}} </h5>
+                                @endIf
+                            </div>
 
                     </div>
                 </div>

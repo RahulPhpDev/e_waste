@@ -38,7 +38,11 @@ class Product extends Model
 	public function getProductQuantityAttribute()
 	{
 		return $this->inventory()->where('approved', 1)->sum('quantity');
+	}
 
+	public function cartProduct()
+	{
+		return $this->hasMany(CartProduct::class);
 	}
     //
 }

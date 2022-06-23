@@ -3,6 +3,7 @@
     <td> {{$record->name}}</td>
     {{-- <td> {{$record->unit->name}} </td> --}}
     <td> {{$record->category->name}} </td>
+    <td> {{$record->product_quantity}} </td>
     <td> {{$record->price}} </td>
 
 

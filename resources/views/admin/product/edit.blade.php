@@ -102,6 +102,16 @@
                        
 
                         <div class="row">
+                             <div class="input-field col m6 s6">
+
+
+                           <label for="quantity" class="active"> Quantity</label>
+                              <input id = "quantity" value = "{{ $record->product_quantity }}" name = "quantity" id="quantity"/>
+
+                            @error('quantity')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
 
                              <div class="input-field col m6 s6">
                              <label for="name" class="active"> Price </label>

@@ -25,8 +25,9 @@ class InventoryController extends Controller
      */
     public function index($product_id)
     {
-       $records = Product::with('inventory', 'inventory.image' , 'inventory.type')
+       $records = Product::with('inventory', 'inventory.image' , 'inventory.type', 'cartProduct')
                         ->findOrFail($product_id);
+                        // dd($records, $records->cartProduct->sum('quantity') );
        return view('admin.inventory.index', compact('records'));
     }
 
