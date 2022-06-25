@@ -9,6 +9,16 @@ class Product extends Model
 {
 	use SoftDeletes;
 
+	protected static function boot()
+	{
+		parent::boot();
+		self::updating( function ($model) {
+			if ($model->isDirty('price') ) {
+				$model->cartProduct()->update(['price' => $model->price]);
+			}
+		});
+	}
+
 	 protected $guarded = [];
 
 	 protected $appends = ['product_quantity'];
@@ -40,14 +50,24 @@ class Product extends Model
 		return $this->inventory()->where('approved', 1)->sum('quantity');
 	}
 
+	public function getApprovedInventory()
+	{
+		return $this->inventory()->where('approved', 1)->first();
+	}
+
 	public function cartProduct()
 	{
 		return $this->hasMany(CartProduct::class);
 	}
 
-	// public function isProductInCart() {
-	// 	if (!Auth::user()) return false;
-	// 	dd($this);
-	// }
+	public function scopeIsProductInCart($query) {
+		  $query->addSelect([
+                'in_cart' =>  CartProduct::select('id')
+                ->whereHas('cart' , function ($query) {
+                    return $query->where('user_id', auth()->user()->id);
+                })
+                ->whereColumn('product_id', 'products.id')->take(1)
+           ]);
+	}
     //
 }

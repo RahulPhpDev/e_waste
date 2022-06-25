@@ -24,7 +24,7 @@ class CartRequest extends FormRequest
     public function rules()
     {
         return [
-            'product_id' => 'required', 'exists:App\Models\Product,id',
+            'product_id' => ['required', 'exists:App\Models\Product,id'],
             'price' => 'required',
         ];
     }

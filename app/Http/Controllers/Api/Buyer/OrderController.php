@@ -11,10 +11,11 @@ use Illuminate\Support\Facades\DB;
 use Auth;
 use App\User;
 use App\Notifications\OrderNotification;
-
+use App\Exceptions\OutOfStockException;
 
 class OrderController extends Controller
 {
+    // use OrderByIdScope;
     /**
      * Display a listing of the resource.
      *
@@ -23,8 +24,8 @@ class OrderController extends Controller
     public function index()
     {
         $order = Auth::user()->order;
-        $order->loadMissing('orderAddress', 'product:id,name', 'product.image');
-
+        $order->loadMissing('orderAddress', 'product:id,name', 'product.image:id,url');
+// dd($order);
         return response(['sucees' => true, 'data' => $order], 200);
     }
 
@@ -55,12 +56,18 @@ class OrderController extends Controller
             $order_count =0; 
             foreach ($request->product as $key => $item) {
                 $product = Product::findOrFail($item['id']);
+                $quantity = $item['quantity'] ? $item['quantity'] : 1;
+                if ( $product->product_quantity < $quantity)
+                {
+                    throw new OutOfStockException('Something Went Wrong.');
+                }
                        $price = $product->price;
                        $order =  Order::create([
                             'product_id' => $product->id,
                             'price' => $price,
-                            'quantity' =>$item['quantity'] || 1,
-                            'user_id' => $userId
+                            'quantity' => $quantity,
+                            'user_id' => $userId,
+                            'status' => 1
                         ]);
                 
                   $order->orderAddress()->create($address);
@@ -78,7 +85,17 @@ class OrderController extends Controller
                 return response()->json([
                     'success' => 'true'
                 ]);
-           } catch (\Exception $e) {
+           }
+           catch (OutOfStockException $e) {
+             DB::rollBack();
+            return response()->json([
+                'success' => 'false',
+                'type' => 'out_of_stock',
+                'msg' => 'Quantity is more than stock'
+            ]);
+         }
+           
+            catch (\Exception $e) {
              DB::rollBack();
             return response()->json([
                 'success' => 'false',

@@ -22,8 +22,9 @@ class CartController extends Controller
     public function index()
     {
         $cart = Auth::user()->cart();
-       $record =  $cart->with('cartProduct','cartProduct.product:id,name' )->get();
-        // dd(CartResource::collection($record));
+       $record =  $cart
+                    ->with('cartProduct','cartProduct.product.image:id,url' ,'cartProduct.product:id,name')
+                    ->get();
         return CartResource::collection($record);
     }
 

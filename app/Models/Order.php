@@ -8,9 +8,10 @@ use App\Enums\OrderStatusEnum;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 use Auth;
+use App\Traits\OrderByTrait;
 class Order extends Model
 {
-	 use SoftDeletes;
+	 use SoftDeletes, OrderByTrait;
 	 protected $appends = ['order_status'];
 
 	 protected $guarded = [];
@@ -34,20 +35,29 @@ protected static function boot()
 		self::created( function ($model) {
 			$model->order_num = 'EWMUO-'.Str::of(now()->timestamp)->substr(-3).$model->id;
 			$model->deleteIfProductHasInCart();
+			$model->decreaseProductQuantityByOrderProductQuantity(); // decrease the quanity of buy product
 			$model->save();
 		});
 	}
 
+	public function decreaseProductQuantityByOrderProductQuantity()
+	{
+		$product = $this->product;
+		$activeInventory = $product->getApprovedInventory();
+		$activeInventory->quantity = $activeInventory->quantity - $this->quantity;
+		$activeInventory->save();
+	}
+
 	public function deleteIfProductHasInCart(){
-	 $cart = 	$this->hasProductInCart();
-	 if ($cart && $cart->exists() )
-	 {
-	 	$cartProduct =  $cart->cartProduct->first();
-	 	$cartProduct->delete();
-	 	$cartProduct->save();
-	 	return true;
-	 }
-	 return false;
+		 $cart = 	$this->hasProductInCart();
+		 if ($cart && $cart->exists() )
+		 {
+		 	$cartProduct =  $cart->cartProduct->first();
+		 	$cartProduct->delete();
+		 	$cartProduct->save();
+		 	return true;
+		 }
+		 return false;
 	}
 
 	public function hasProductInCart()

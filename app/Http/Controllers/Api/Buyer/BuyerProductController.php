@@ -13,24 +13,17 @@ class BuyerProductController extends Controller
    public function index(Request $request) {
 
        $catgory = CategoryResource::collection(Category::with('image')->get());
-       $product =  Product::addSelect([
-                    'in_cart' =>  CartProduct::select('id')
-                                ->whereHas('cart' , function ($query) {
-                                    return $query->where('user_id', auth()->user()->id);
-                                })
-                                ->whereColumn('product_id', 'products.id')->limit(1)
-                   ])
-                    ->with('image')->when($request->category_id, function ($model) use($request) {
-            return $model->where('category_id',  $request->category_id);
-        }
-       )->get();
-    
+       $product =  Product::isProductInCart()
+                    ->with('image')
+                    ->when($request->category_id, function ($model) use($request) {
+                          return $model->where('category_id',  $request->category_id);
+                         })
+                    ->get();
        return collect([
            'product' => $product,
            'category' => $catgory,
            'sucess' => true
        ]);
-       
 
    }
 }
