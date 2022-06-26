@@ -7,7 +7,11 @@
 
          ?>
          <input name="_token" value = "{{csrf_token()}}" type = "hidden" />
+
+
                 <ul class="navbar-list right">
+
+                    
                     <li class="dropdown-language">
                         <a class="waves-effect waves-block waves-light translation-button" href="#" data-target="translation-dropdown"><span class="flag-icon flag-icon-gb"></span></a>
                     </li>

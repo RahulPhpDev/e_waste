@@ -11,6 +11,18 @@ class CartProduct extends Model
 
 	 protected $guarded = [];
 
+	protected static function boot()
+	{
+		parent::boot();
+		self::deleted( function ($model) {
+			$allCart = $model->where('cart_id', $model->cart_id)->first();	
+			if (!$allCart )
+			{
+				$model->cart()->delete();
+			}
+		});
+	}
+
 	 public function product()
 	 {
 	 	return $this->belongsTo(Product::class);

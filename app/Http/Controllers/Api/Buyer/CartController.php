@@ -21,7 +21,7 @@ class CartController extends Controller
      */
     public function index()
     {
-        $cart = Auth::user()->cart();
+       $cart = Auth::user()->cart();
        $record =  $cart
                     ->with('cartProduct','cartProduct.product.image:id,url' ,'cartProduct.product:id,name')
                     ->get();
@@ -36,8 +36,6 @@ class CartController extends Controller
      */
     public function store(CartRequest $request)
     {
-        // check if cart exist 
-        // insert into product
         $product = Product::findOrFail($request->product_id);
         $userId = Auth::user()->id;
         $cart = Cart::updateOrCreate(

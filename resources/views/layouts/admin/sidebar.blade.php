@@ -9,6 +9,10 @@
 
     <ul class="sidenav sidenav-collapsible leftside-navigation collapsible sidenav-fixed menu-shadow" id="slide-out" data-menu="menu-navigation" data-collapsible="menu-accordion">
 
+
+         
+
+
                 <x-admin.navigation
                     names='User'
                     link='admin.user.index'
@@ -20,16 +24,30 @@
                     link='admin.district.index'
                     icon="add_location"
                 />
-                <x-admin.navigation
-                    names='Category'
-                    link='admin.category.index'
-                    icon="category"
-                />
-                <x-admin.navigation
-                    names='Sub Category'
-                    link='admin.sub-category.index'
-                    icon="category"
-                />
+                 <li class="no-padding">
+                <ul class="collapsible collapsible-accordion">
+                  <li>
+                    <a class="collapsible-header">Category <i class="material-icons">arrow_drop_down</i></a>
+                    <div class="collapsible-body">
+                      <ul>
+                       
+                        <x-admin.navigation
+                            names='Category'
+                            link='admin.category.index'
+                            icon="category"
+                         />
+                        <x-admin.navigation
+                            names='Sub Category'
+                            link='admin.sub-category.index'
+                            icon="category"
+                        />
+                      </ul>
+                    </div>
+                  </li>
+                </ul>
+            </li>
+
+               
                   <x-admin.navigation
                     names='Product Type'
                     link='admin.type.index'
@@ -60,32 +78,63 @@
                     icon="report"
                 />
 
-                 <x-admin.navigation
-                    names='WhyWe'
-                    link='admin.why-we.index'
-                    icon="question_answer"
-                />
+            <li class="no-padding">
+                <ul class="collapsible collapsible-accordion">
+                  <li>
+                    <a class="collapsible-header">Common <i class="material-icons">arrow_drop_down</i></a>
+                    <div class="collapsible-body">
+                      <ul>
+                       
+                        <x-admin.navigation
+                            names='WhyWe'
+                            link='admin.why-we.index'
+                            icon="question_answer"
+                        />
 
-                 <x-admin.navigation
-                    names='Article'
-                    link='admin.article.index'
-                    icon="book"
-                />
+                      <x-admin.navigation
+                            names='Article'
+                            link='admin.article.index'
+                            icon="book"
+                        />
+                         <x-admin.navigation
+                            names='Video'
+                            link='admin.video.index'
+                            icon="ondemand_video"
+                        />
+
+
+                    <x-admin.navigation
+                        names='Event'
+                        link='admin.event.index'
+                        icon="event"
+                    />
+
+                      </ul>
+                    </div>
+                  </li>
+                </ul>
+            </li>
              
-                <x-admin.navigation
-                    names='Video'
-                    link='admin.video.index'
-                    icon="ondemand_video"
-                />
 
-
-                <x-admin.navigation
-                    names='Event'
-                    link='admin.event.index'
-                    icon="event"
-                />
-
-             
+            <ul class="collapsible collapsible-accordion">
+                  <li>
+                    <a class="collapsible-header">Buyer <i class="material-icons">arrow_drop_down</i></a>
+                    <div class="collapsible-body">
+                      <ul>
+                       
+                        <x-admin.navigation
+                            names='Order'
+                            link='admin.order.index'
+                            icon="order"
+                         />
+                      </ul>
+                    </div>
+                  </li>
+                </ul>
 
     </ul>
 </aside>
+
+
+
+

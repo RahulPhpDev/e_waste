@@ -9,19 +9,32 @@ use Illuminate\Support\Str;
 use Carbon\Carbon;
 use Auth;
 use App\Traits\OrderByTrait;
+use App\User;
+
 class Order extends Model
 {
 	 use SoftDeletes, OrderByTrait;
 	 protected $appends = ['order_status'];
+	 protected $casts = [
+	 	'created_at' => 'datetime:Y-m-d'
+	 ];
 
 	 protected $guarded = [];
 
-	protected $statusEnum = [
+	public $statusEnum = [
 		0 => 'pending',
 		1 => 'accept',
-		2 => 'dispatched',
+		'dispatched'=> 'Dispatched',
+		'delivered' => 'delivered',
+		'rejected' => 'Rejected',
+	];
+
+	public $statusEnumKeys = [
+		0 => 'pending',
+		1 => 'accept',
+		2=> 'Dispatched',
 		3 => 'delivered',
-		4 => 'rejected',
+		4 => 'Rejected',
 	];
 	const PENDING =   0;
     const ACCEPT =   1;
@@ -75,12 +88,23 @@ protected static function boot()
 
 	 public function getOrderStatusAttribute() 
 	 {
-	 	return $this->statusEnum[$this->status];
+	 	return $this->statusEnumKeys[$this->status];
 	 }
 
 	 public function product()
 	 {
 	 	return $this->belongsTo(Product::class);
+	 }
+
+	 public function user() {
+	 	return $this->belongsTo(User::class);
+	 }
+
+	 public function getCreatedAtAttribute($value) 
+	 {
+	 		// $this->attributes['schedule_at'] =
+	 		return Carbon::parse($value)->format('d-M-Y');;
+	 	// return Carbon::d>format('Y-m-d');;
 	 }
     //
 }

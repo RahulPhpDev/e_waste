@@ -12053,3 +12053,26 @@ textarea {
 .font-bold {
     font-weight: 600;
 }
+.collapsible-accordion ul {
+   margin-left: 1.5rem;
+    background: #f8f8f8;
+    box-shadow: 1px -1px 0px 0.1px #ddd;
+}
+.text-small {
+    font-size: 8px !important;
+}
+.pagination li {
+    padding-top: 2px;
+}
+.pagination {
+    line-height: 1.9rem;
+    margin-left: 6px;
+}
+.pagination .active {
+    margin-top: 3px;
+}
+
+.card-content nav {
+    height:  2.8rem;
+    border-radius: 2px;
+}
