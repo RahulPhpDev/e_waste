@@ -64,9 +64,10 @@ class ProductController extends Controller
                     'product_image' => 'mimes:jpeg,png|max:1014',
                 ]);
 
-            $path =  $request->file('product_image')
-                                ->storeAs('/product',
-                                    $product->id.'.'.$request->product_image->extension()
+       
+                     $path =  $request->file('product_image')
+                                ->storeAs('public/product',
+                                    now()->timestamp.'_'.$product->id.'.'.$request->product_image->extension()
                                 );
 
                 $product->image()->create([
@@ -95,7 +96,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        $product->loadMissing('inventory', 'category', 'unit');
+        $product->loadMissing('inventory', 'category', 'unit', 'image');
         return view('admin.product.detail', compact('product'));
     }
 
@@ -107,11 +108,11 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        $product->loadMissing('inventory', 'category', 'unit');
+        $product->loadMissing('inventory', 'category', 'unit', 'image');
         $units = Unit::pluck( 'name' , 'id')->prepend('Select Unit', '' );
         $categories = Category::pluck('name', 'id')->prepend('Select Category', '');
         $types = Type::pluck('name', 'id'   )->prepend('Select Type', '');
-        // dd($product, $types );
+       
         return view('admin/product/edit', [
             'record' => $product,
             'units' => $units,
@@ -129,13 +130,36 @@ class ProductController extends Controller
      */
     public function update(ProductRequest $request, Product $product)
     {
+        $product->loadMissing('image');
         $product->update( $request->updateProductDetails() );
         $product->active = 1;
         $product->save();
+        if ( $request->hasFile('product_image') &&
+            $request->file('product_image')->isValid()
+        )
+        {
+             $validated = $request->validate([
+                    'product_image' => 'mimes:jpeg,png|max:1014',
+                ]);
+            $path =  $request->file('product_image')
+                                ->storeAs('public/product',
+                                    now()->timestamp.'_'.$product->id.'.'.$request->product_image->extension()
+                                );
+            if (  $product->image ) {
+                     \Storage::delete('public/'.$product->image->url);
+                    // dd('here',$product->image->url);
+                    $product->image()->delete();
+                   
+            }
+                
+                $product->image()->create([
+                    'url' => $path,
+                ]);
+        }
         $inventory = $product->inventory()->where('approved', 1)->withTrashed()->first();
         if(!$inventory)
         {
-         $product->inventory()->create( $request->createProductInventoryDetails()  );
+             $product->inventory()->create( $request->createProductInventoryDetails()  );
         } else {
              $inventory->quantity = $request->quantity;
              $inventory->restore();

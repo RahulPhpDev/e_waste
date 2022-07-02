@@ -32,6 +32,19 @@
                         </div> 
 
                     </div>
+ @push('scripts')
+    <script>
+        $(document).ready( function () {
+            console.log('dfs');
+               $('.datepicker').pickadate({
+                format: 'yyyy-mm-dd',
+                selectMonths: true, // Enable Month Selection
+                selectYears: 1 // Creates a dropdown of 10 years to control year
+                }); 
+        })
+
+        </script>
+    @endpush
 
 
 

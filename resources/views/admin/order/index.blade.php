@@ -12,8 +12,13 @@
 
                          
                             @foreach($records as $record)
-
                             <div class="order-header">
+
+                                <a 
+                                class="btn gradient-45deg-light-blue-cyan waves-effect waves-light btn-small-custom"
+                                href = {{route('admin.order.detail', $record->id)}}
+                                > Details </a>
+
                                   @include('admin.order.order-info', [ 'title' => 'User', 'value' => $record->user->name])
                                   @include('admin.order.order-info', [ 'title' => 'Order Num', 'value' => $record->order_num])
                                   @include('admin.order.order-info', [ 'title' => 'Product', 'value' => $record->product->name])

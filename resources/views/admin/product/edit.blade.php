@@ -114,16 +114,17 @@
                         </div>
 
                              <div class="input-field col m6 s6">
-                             <label for="name" class="active"> Price </label>
-                            <input id="price" type="text" class = 'validate' value = "{{ $record->price }}" name = 'price'>
+                                 <label for="name" class="active"> Price </label>
+                                <input id="price" type="text" class = 'validate' value = "{{ $record->price }}" name = 'price'>
 
-                            @error('price')
-                            <span class="text-danger">{{ $message }}</span>
-                            @enderror
+                                @error('price')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                             </div>
+
                         </div>
 
-                        </div>
- <div class="row">
+                        <div class="row">
                             <div class="input-field col m12 s12" >
                                 <label for="description" class="active"> Description</label>
                               <textarea id = "description" name = "description" id="message5" class="materialize-textarea">{{$record->description}}</textarea>
@@ -131,6 +132,31 @@
                             @error('description')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
+                      
+                      <div class="row">
+                               <div class="col m6 s12 file-field input-field">
+                                    @if($record->image && $record->image->url )
+                                        <img  width ="200px" height = "100px" src ="/storage/{{$record->image->url}}"  />
+                              
+                                    @endif
+                             </div>
+
+                              <div class="col m6 s12 file-field input-field">
+                                    <div class="btn float-right">
+                                        <span>Upload Image</span>
+                                        <input type="file" name="product_image">
+                                    </div>
+                                    <div class="file-path-wrapper">
+                                        <input class="file-path validate" type="text">
+                                    </div>
+
+                                @error('image')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                             </div>
+
+                        </div>
+
                         </div>
 
                         <div class="input-field col m4 s12" >

@@ -27,14 +27,23 @@ class OrderController extends Controller
     {
         $order = Order::findOrFail($id);
         $order->status = $request->status;
-        $order->dispatch_date = $request->dispatch_date;
-        $order->orderAddress()->update(
-            [
-                'admin_comment' => $request->reason
-            ]
-        );
+        if ($order->dispatch_date)
+            $order->dispatch_date = \Carbon\Carbon::createFromFormat('d/m/Y', $request->dispatch_date)->format('Y/m/d');
+        if ($request->reason)
+            $order->orderAddress()->update(
+                [
+                    'admin_comment' => $request->reason
+                ]
+            );
         $order->save();
-    return redirect()->route('admin.order.index')->with('success','Order updated');;
+    
+        return redirect()->route('admin.order.index')->with('success','Order updated');;
 
+    }
+
+    public function show(Order $order) 
+    {
+        // dd($order->loadMissing('user','product', 'product.image'));
+        return view('admin/order/show', ['record' => $order->loadMissing('user','product', 'product.image')]);
     }
 }

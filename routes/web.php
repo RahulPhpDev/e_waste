@@ -114,6 +114,7 @@ Route::group([
       Route::post('/report', 'ScrapReportController@export')->name('report.scrap');
       Route::get('/order', 'OrderController@index')->name('order.index');
       Route::put('/order/{id?}', 'OrderController@update')->name('order.update');
+      Route::get('/order/{order?}', 'OrderController@show')->name('order.detail');
 
 });
 

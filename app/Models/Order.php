@@ -18,7 +18,9 @@ class Order extends Model
 	 protected $casts = [
 	 	'created_at' => 'datetime:Y-m-d'
 	 ];
+	 protected $dates = ['dispatch_date'];
 
+	 public $with = ['orderAddress'];
 	 protected $guarded = [];
 
 	public $statusEnum = [
